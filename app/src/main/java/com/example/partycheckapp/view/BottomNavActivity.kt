@@ -6,6 +6,8 @@ import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.partycheckapp.R
+import com.example.partycheckapp.view.fragments.bottom_nav_fragments.ProfileFragment
+import com.example.partycheckapp.view.fragments.login_fragments.LoginFragment
 import kotlinx.android.synthetic.main.activity_bottom_nav.*
 
 
@@ -31,8 +33,12 @@ class BottomNavActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_profile -> {
-                message.setText(R.string.profile)
-                supportActionBar?.setTitle(R.string.profile)
+                supportActionBar?.hide()//.setTitle(R.string.profile)
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, ProfileFragment.newInstance())
+                    .commit()
+
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -48,7 +54,7 @@ class BottomNavActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_items, menu)
-        this.menu=menu
+        this.menu = menu
         return true
     }
 }

@@ -21,4 +21,6 @@
     <string name="sign_in">First time here? Sign in</string>
     <string name="sign_in_btn">Sign In</string>
     <string name="email">Email</string>
+    <string name="phone">phone number</string>
+    <string name="card_number">card number</string>
 </resources>
