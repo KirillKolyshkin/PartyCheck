@@ -10,7 +10,8 @@ data class Party (
     val location: String,
     val date: Date,
     val password: String,
+    val organization: String,
     val participantList: ArrayList<Long>,
     val purchaseList: ArrayList<Long>,
-    val image: ByteArray
+    val image: ByteArray?
 )

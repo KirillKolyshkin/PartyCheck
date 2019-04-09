@@ -4,10 +4,11 @@ import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import com.example.partycheckapp.R
+import com.example.partycheckapp.di.module.AppModule
+import com.example.partycheckapp.di.module.PartyModule
 import com.example.partycheckapp.view.fragments.bottom_nav_fragments.ProfileFragment
-import com.example.partycheckapp.view.fragments.login_fragments.LoginFragment
+import com.example.partycheckapp.view.fragments.bottom_nav_fragments.partyList.PartyListFragment
 import kotlinx.android.synthetic.main.activity_bottom_nav.*
 
 
@@ -18,22 +19,23 @@ class BottomNavActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.action_debtors -> {
-                message.setText(R.string.debtors)
                 supportActionBar?.setTitle(R.string.debtors)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_search -> {
-                message.setText(R.string.search)
                 supportActionBar?.setTitle(R.string.search)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_party_list -> {
-                message.setText(R.string.my_party)
                 supportActionBar?.setTitle(R.string.my_party)
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, PartyListFragment.newInstance())
+                    .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_profile -> {
-                supportActionBar?.hide()//.setTitle(R.string.profile)
+                supportActionBar?.hide()
                 supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container, ProfileFragment.newInstance())
@@ -56,5 +58,8 @@ class BottomNavActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.toolbar_items, menu)
         this.menu = menu
         return true
+    }
+
+    companion object {
     }
 }
