@@ -9,4 +9,5 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun dateComponent(): DateComponent.Builder
+
 }

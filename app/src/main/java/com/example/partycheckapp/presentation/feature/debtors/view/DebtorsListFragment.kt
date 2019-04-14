@@ -5,24 +5,24 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.partycheckapp.R
-import com.example.partycheckapp.data.party.Party
-import com.example.partycheckapp.presentation.feature.party.adapter.PartyListAdapter
-import com.example.partycheckapp.presentation.feature.party.presenter.PartyListPresenter
-import kotlinx.android.synthetic.main.main_activity_view.*
-import kotlinx.android.synthetic.main.party_list.*
+import com.example.partycheckapp.data.debtors.UserDebtor
+import com.example.partycheckapp.presentation.feature.debtors.adapter.DebtorsListAdapter
+import com.example.partycheckapp.presentation.feature.debtors.presenter.DebtorsListPresenter
+import kotlinx.android.synthetic.main.user_list.*
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 
-class PartyListFragment : MvpAppCompatFragment(), PartyListView {
+
+class DebtorsListFragment : MvpAppCompatFragment(), DebtorsListView {
 
     @InjectPresenter
-    lateinit var partyListPresenter: PartyListPresenter
+    lateinit var partyListPresenter: DebtorsListPresenter
 
-    private val recyclerAdapter = PartyListAdapter()
+    private val recyclerAdapter = DebtorsListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,25 +33,23 @@ class PartyListFragment : MvpAppCompatFragment(), PartyListView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recycler_view.addItemDecoration(
-            DividerItemDecoration(
-                this.context, resources.configuration.orientation
-            )
-        )
+        recycler_view.addItemDecoration(DividerItemDecoration(
+            this.context, resources.configuration.orientation
+        ))
         val manager = LinearLayoutManager(context)
         recycler_view.adapter = recyclerAdapter
         recycler_view.layoutManager = manager
-        partyListPresenter.setPartyList()
+        partyListPresenter.setUsersDebtorsList()
     }
 
-    override fun showPartyList(dataList: ArrayList<Party>) {
+    override fun showDebtorsList(dataList: ArrayList<UserDebtor>) {
         recyclerAdapter.list = dataList
     }
 
     companion object {
-        fun newInstance(): PartyListFragment {
+        fun newInstance(): DebtorsListFragment {
             val args = Bundle()
-            val fragment = PartyListFragment()
+            val fragment = DebtorsListFragment()
             fragment.arguments = args
             return fragment
         }

@@ -5,6 +5,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import com.example.partycheckapp.R
+import com.example.partycheckapp.presentation.feature.party.view.DebtorsListFragment
 import com.example.partycheckapp.presentation.feature.profile.view.ProfileFragment
 import com.example.partycheckapp.presentation.feature.party.view.PartyListFragment
 import kotlinx.android.synthetic.main.main_activity_view.*
@@ -17,14 +18,21 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.action_debtors -> {
+                supportActionBar?.show()
                 supportActionBar?.setTitle(R.string.debtors)
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, DebtorsListFragment.newInstance())
+                    .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_search -> {
+                supportActionBar?.show()
                 supportActionBar?.setTitle(R.string.search)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_party_list -> {
+                supportActionBar?.show()
                 supportActionBar?.setTitle(R.string.my_party)
                 supportFragmentManager
                     .beginTransaction()
@@ -33,12 +41,11 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_profile -> {
-                supportActionBar?.hide()
                 supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container, ProfileFragment.newInstance())
                     .commit()
-
+                supportActionBar?.hide()
                 return@OnNavigationItemSelectedListener true
             }
         }
