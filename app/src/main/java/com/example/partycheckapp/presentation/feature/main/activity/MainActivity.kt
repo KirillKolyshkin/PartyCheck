@@ -8,6 +8,7 @@ import com.example.partycheckapp.R
 import com.example.partycheckapp.presentation.feature.party.view.DebtorsListFragment
 import com.example.partycheckapp.presentation.feature.profile.view.ProfileFragment
 import com.example.partycheckapp.presentation.feature.party.view.PartyListFragment
+import com.example.partycheckapp.presentation.feature.searchParty.view.SearchPartyListFragment
 import kotlinx.android.synthetic.main.main_activity_view.*
 
 
@@ -27,8 +28,12 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_search -> {
-                supportActionBar?.show()
                 supportActionBar?.setTitle(R.string.search)
+                supportActionBar?.show()
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, SearchPartyListFragment.newInstance())
+                    .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_party_list -> {

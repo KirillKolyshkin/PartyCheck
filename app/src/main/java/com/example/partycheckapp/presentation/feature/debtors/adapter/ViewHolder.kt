@@ -1,18 +1,30 @@
 package com.example.partycheckapp.presentation.feature.debtors.adapter
 
-import android.graphics.Color
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.partycheckapp.R
 import com.example.partycheckapp.data.debtors.UserDebtor
 import kotlinx.android.synthetic.main.user_item.view.*
-import java.util.*
 
 class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bindViews(user: UserDebtor) {
-        itemView.tv_name.text = user.name
-        itemView.tv_phone_num.text = user.phoneNumber.toString()
-        if (user.debtSize < 0)
-            itemView.tv_money_amount.setTextColor(Color.parseColor("#FF5722"))
-        itemView.tv_money_amount.text = "$ " + String.format( Locale.US, "%.2f", user.debtSize)
+        with(itemView) {
+            tv_name.text = user.name
+            tv_phone_num.text = user.phoneNumber.toString()
+            val colorRes = if (user.debtSize < 0) {
+                R.color.colorButton
+            } else {
+                R.color.colorGreenNumber
+            }
+            val color = ContextCompat.getColor(itemView.context, colorRes)
+            tv_money_amount.setTextColor(color)
+            tv_money_amount.text = MONET_FORMAT.format(user.debtSize)
+
+        }
+    }
+
+    companion object {
+        private const val MONET_FORMAT = "%.2f $"
     }
 }

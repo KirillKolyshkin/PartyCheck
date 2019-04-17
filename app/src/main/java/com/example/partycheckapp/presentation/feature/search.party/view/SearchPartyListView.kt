@@ -1,11 +1,11 @@
-package com.example.partycheckapp.presentation.feature.party.view
+package com.example.partycheckapp.presentation.feature.searchParty.view
 
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
-import com.example.partycheckapp.data.party.PartyWithDebt
+import com.example.partycheckapp.data.party.Party
 
 @StateStrategyType(value = AddToEndSingleStrategy::class)
-interface PartyListView : MvpView {
-    fun showPartyList(dataList: ArrayList<PartyWithDebt>)
+interface SearchPartyListView : MvpView {
+    fun showPartyList(dataList: ArrayList<Party>)
 }

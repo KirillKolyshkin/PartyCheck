@@ -8,8 +8,5 @@ import com.example.partycheckapp.presentation.feature.party.view.PartyListView
 @InjectViewState
 class PartyListPresenter : MvpPresenter<PartyListView>() {
 
-    fun setPartyList() = viewState.showPartyList(PartyModel().getTestParty())
-
-    //fun openDate(int: Int) =
-        //router.navigateTo(Screens.DateDetailScreen(int))
+    fun setPartyDebtList() = viewState.showPartyList(PartyModel().getTestDebtParty())
 }

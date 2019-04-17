@@ -2,7 +2,7 @@
     <string name="app_name">PartyCheckApp</string>
     <string name="debtors">debtors</string>
     <string name="search">search</string>
-    <string name="my_party">my_party</string>
+    <string name="my_party">my party</string>
     <string name="profile">profile</string>
     <string name="title_activity_bottom_nav">BottomNavActivity</string>
     <string name="title_home">home</string>

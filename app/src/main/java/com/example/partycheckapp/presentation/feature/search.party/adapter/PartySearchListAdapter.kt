@@ -1,17 +1,18 @@
-package com.example.partycheckapp.presentation.feature.party.adapter
+package com.example.partycheckapp.presentation.feature.searchParty.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.partycheckapp.R
-import com.example.partycheckapp.data.party.PartyWithDebt
+import com.example.partycheckapp.data.party.Party
+import com.example.partycheckapp.presentation.feature.search.party.adapter.ViewHolder
 
-class PartyListAdapter : RecyclerView.Adapter<ViewHolder>() {
+class PartySearchListAdapter : RecyclerView.Adapter<ViewHolder>() {
 
-    var list: ArrayList<PartyWithDebt> = arrayListOf()
+    var list: ArrayList<Party> = arrayListOf()
     override fun getItemCount() = list.size
 
-    fun addAll(values: List<PartyWithDebt>) {
+    fun addAll(values: List<Party>) {
         for (value in values) {
             list.add(value)
             notifyItemInserted(list.size)
@@ -19,7 +20,7 @@ class PartyListAdapter : RecyclerView.Adapter<ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.party_item_debt, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.party_item, parent, false)
         return ViewHolder(v)
     }
 

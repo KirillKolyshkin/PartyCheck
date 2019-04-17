@@ -1,4 +1,4 @@
-package com.example.partycheckapp.presentation.feature.party.view
+package com.example.partycheckapp.presentation.feature.searchParty.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,17 +9,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.partycheckapp.R
-import com.example.partycheckapp.data.party.PartyWithDebt
-import com.example.partycheckapp.presentation.feature.party.adapter.PartyListAdapter
-import com.example.partycheckapp.presentation.feature.party.presenter.PartyListPresenter
+import com.example.partycheckapp.data.party.Party
+import com.example.partycheckapp.presentation.feature.searchParty.adapter.PartySearchListAdapter
+import com.example.partycheckapp.presentation.feature.searchParty.presenter.PartyListPresenter
 import kotlinx.android.synthetic.main.party_list.*
 
-class PartyListFragment : MvpAppCompatFragment(), PartyListView {
+class SearchPartyListFragment : MvpAppCompatFragment(),
+    SearchPartyListView {
 
     @InjectPresenter
     lateinit var partyListPresenter: PartyListPresenter
 
-    private val recyclerAdapter = PartyListAdapter()
+    private val recyclerAdapter = PartySearchListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,17 +39,17 @@ class PartyListFragment : MvpAppCompatFragment(), PartyListView {
         val manager = LinearLayoutManager(context)
         recycler_view.adapter = recyclerAdapter
         recycler_view.layoutManager = manager
-        partyListPresenter.setPartyDebtList()
+        partyListPresenter.setPartySearchList()
     }
 
-    override fun showPartyList(dataList: ArrayList<PartyWithDebt>) {
+    override fun showPartyList(dataList: ArrayList<Party>) {
         recyclerAdapter.list = dataList
     }
 
     companion object {
-        fun newInstance(): PartyListFragment {
+        fun newInstance(): SearchPartyListFragment {
             val args = Bundle()
-            val fragment = PartyListFragment()
+            val fragment = SearchPartyListFragment()
             fragment.arguments = args
             return fragment
         }
