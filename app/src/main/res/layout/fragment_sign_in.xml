@@ -4,73 +4,110 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <TextView
-            android:id="@+id/tv_welcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/welcome_string"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            android:textSize="24sp"
-            android:layout_marginTop="40sp"
-            android:textColor="@color/colorPrimaryText"
-    />
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <ImageView
-            android:id="@+id/iv_icon"
-            android:layout_height="90sp"
-            android:layout_width="90sp"
-            android:src="@drawable/ic_party"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tv_welcome"
-            android:layout_marginTop="60sp"
-    />
+            <TextView
+                    android:id="@+id/tv_welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/welcome_string"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentTop="true"
+                    android:textSize="24sp"
+                    android:layout_marginTop="40sp"
+                    android:textColor="@color/colorPrimaryText"
+            />
 
-    <EditText
-            android:id="@+id/et_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="15"
-            android:layout_below="@+id/iv_icon"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30sp"
-            android:hint="@string/login"
-    />
+            <ImageView
+                    android:id="@+id/iv_icon"
+                    android:layout_height="90sp"
+                    android:layout_width="90sp"
+                    android:src="@drawable/ic_party"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/tv_welcome"
+                    android:layout_marginTop="60sp"
+            />
 
-    <EditText
-            android:id="@+id/et_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="15"
-            android:layout_below="@+id/et_login"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15sp"
-            android:hint="@string/password"
-    />
+            <EditText
+                    android:id="@+id/et_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="15"
+                    android:layout_below="@+id/iv_icon"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30sp"
+                    android:hint="@string/login"
+            />
 
-    <EditText
-            android:id="@+id/et_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="15"
-            android:layout_below="@+id/et_password"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15sp"
-            android:hint="@string/email"
-    />
 
-    <Button
-            android:id="@+id/btn_sign_in"
-            style="@style/ButtonMain"
-            android:layout_width="280sp"
-            android:layout_height="40sp"
-            android:text="@string/sign_in_btn"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/et_email"
-            android:textSize="20sp"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="60sp"
-    />
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ti_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15sp"
+                    android:layout_below="@+id/ti_phone"
+                    android:layout_centerHorizontal="true">
+
+                <EditText
+                        android:id="@+id/et_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="15"
+                        android:imeOptions="actionUnspecified"
+                        android:inputType="textPassword"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/password"
+                />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ti_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15sp"
+                    android:layout_below="@+id/et_login"
+                    android:layout_centerHorizontal="true">
+                <EditText
+                        android:id="@+id/et_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="15"
+                        android:inputType="phone"
+                        android:hint="Phone"
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                    android:id="@+id/btn_sign_in"
+                    style="@style/ButtonMain"
+                    android:layout_width="280sp"
+                    android:layout_height="40sp"
+                    android:text="@string/sign_in_btn"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/ti_password"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginTop="60sp"
+            />
+
+            <Button
+                    android:id="@+id/btn_get_password"
+                    style="@style/ButtonMain"
+                    android:layout_width="200sp"
+                    android:layout_height="32sp"
+                    android:text="Get Password"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/btn_sign_in"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginTop="60sp"
+                    android:layout_marginBottom="60sp"
+            />
+        </RelativeLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

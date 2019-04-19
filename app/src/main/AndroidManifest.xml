@@ -26,6 +26,14 @@
                 android:name=".presentation.feature.main.activity.MainActivity"
                 android:theme="@style/AppTheme">
         </activity>
+
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="1:677917306753:android:c1af9d59a4945295"/>
+
+        <meta-data
+                android:name="io.fabric.ApiKey"
+                android:value="AIzaSyDas4X_jF8xiyzMKg1We5QB0O6Rlc9dMDM" />
     </application>
 
 </manifest>

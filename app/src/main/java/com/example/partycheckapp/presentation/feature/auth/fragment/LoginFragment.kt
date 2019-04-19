@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.example.partycheckapp.R
+import com.example.partycheckapp.presentation.feature.auth.fragment.sign_in.view.SignInFragment
 import com.example.partycheckapp.presentation.feature.main.activity.MainActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 
