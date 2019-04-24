@@ -29,44 +29,31 @@
                     android:layout_marginTop="60sp"
             />
 
-            <EditText
-                    android:id="@+id/et_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="15"
-                    android:layout_below="@+id/iv_icon"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="30sp"
-                    android:hint="@string/login"
-            />
-
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/ti_password"
+                    android:id="@+id/ti_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15sp"
-                    android:layout_below="@+id/ti_phone"
-                    android:layout_centerHorizontal="true">
-
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/iv_icon"
+                    android:layout_marginTop="60sp">
                 <EditText
-                        android:id="@+id/et_password"
+                        android:id="@+id/et_login"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="15"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="textPassword"
-                        android:focusableInTouchMode="true"
-                        android:hint="@string/password"
+                        android:hint="Login"
                 />
+
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/ti_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15sp"
-                    android:layout_below="@+id/et_login"
+                    android:layout_below="@+id/ti_login"
                     android:layout_centerHorizontal="true">
                 <EditText
                         android:id="@+id/et_phone"
@@ -87,24 +74,10 @@
                     android:layout_height="40sp"
                     android:text="@string/sign_in_btn"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/ti_password"
+                    android:layout_below="@+id/ti_phone"
                     android:textSize="20sp"
                     android:textColor="@color/colorWhite"
                     android:layout_marginTop="60sp"
-            />
-
-            <Button
-                    android:id="@+id/btn_get_password"
-                    style="@style/ButtonMain"
-                    android:layout_width="200sp"
-                    android:layout_height="32sp"
-                    android:text="Get Password"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/btn_sign_in"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorWhite"
-                    android:layout_marginTop="60sp"
-                    android:layout_marginBottom="60sp"
             />
         </RelativeLayout>
     </ScrollView>

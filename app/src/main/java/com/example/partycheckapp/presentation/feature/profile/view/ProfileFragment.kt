@@ -11,26 +11,53 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import android.app.Activity
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.example.partycheckapp.PartyApp
+import com.example.partycheckapp.data.user.User
+import com.example.partycheckapp.presentation.feature.profile.presenter.ProfilePresenter
+import javax.inject.Inject
 
 
-class ProfileFragment : MvpAppCompatFragment() {
+class ProfileFragment : MvpAppCompatFragment(), ProfileView {
+
+    @Inject
+    @InjectPresenter
+    lateinit var profilePresenter: ProfilePresenter
+
+    @ProvidePresenter
+    fun initPresenter() = profilePresenter
 
     private var editFieldsMode = true
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        PartyApp.instance
+            .getAppComponent()
+            .dateComponent()
+            .build()
+            .inject(this)
+        super.onCreate(savedInstanceState)
+
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.fragment_profile, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         et_phone_num.tag = et_phone_num.keyListener
         et_card_num.tag = et_card_num.keyListener
         changeFocusable()
-
         if (savedInstanceState == null) {
             ib_edit.setOnClickListener { changeFocusable() }
         }
+    }
+
+    override fun setUser(user: User?) {
+        et_phone_num.setText(user?.phoneNumber)
+        tv_user_name.text = user?.name
     }
 
     fun changeFocusable() {
@@ -61,10 +88,7 @@ class ProfileFragment : MvpAppCompatFragment() {
     companion object {
 
         fun newInstance(): ProfileFragment {
-            val args = Bundle()
-            val fragment = ProfileFragment()
-            fragment.arguments = args
-            return fragment
+            return ProfileFragment()
         }
     }
 }

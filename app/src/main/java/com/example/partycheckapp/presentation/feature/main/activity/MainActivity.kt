@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
 
     private var menu: Menu? = null
 
+    private val profileFragment = ProfileFragment.newInstance()
+
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.action_debtors -> {
@@ -46,11 +48,11 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_profile -> {
+                supportActionBar?.hide()
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, ProfileFragment.newInstance())
+                    .replace(R.id.container, profileFragment)
                     .commit()
-                supportActionBar?.hide()
                 return@OnNavigationItemSelectedListener true
             }
         }

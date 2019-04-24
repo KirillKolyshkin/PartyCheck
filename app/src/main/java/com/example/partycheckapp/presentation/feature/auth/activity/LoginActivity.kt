@@ -3,7 +3,7 @@ package com.example.partycheckapp.presentation.feature.auth.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.partycheckapp.R
-import com.example.partycheckapp.presentation.feature.auth.fragment.LoginFragment
+import com.example.partycheckapp.presentation.feature.auth.view.SignInFragment
 
 class LoginActivity : AppCompatActivity() {
 
@@ -13,7 +13,7 @@ class LoginActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container, LoginFragment.newInstance())
+                .replace(R.id.container, SignInFragment.newInstance())
                 .commit()
         }
 

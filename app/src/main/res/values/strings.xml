@@ -23,7 +23,8 @@
     <string name="email">Email</string>
     <string name="phone">phone number</string>
     <string name="card_number">card number</string>
-    <string name="error_email">Enter email address!</string>
+    <string name="error_phone">Enter phone number!</string>
+    <string name="error_login">Enter your nickname!</string>
     <string name="error_pass">Enter password!</string>
     <string name="error_pass_length">Password too short, enter minimum 6 characters!</string>
     <string name="error_signin">Sign In Error</string>

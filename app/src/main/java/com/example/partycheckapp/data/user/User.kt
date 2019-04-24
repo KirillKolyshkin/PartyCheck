@@ -1,12 +1,10 @@
 package com.example.partycheckapp.data.user
 
-data class User (
-    val id: Long,
+data class User(
     val name: String,
-    val phoneNumber: Long?,
+    val phoneNumber: String,
     val cardNumber: Long?,
-    val found: Boolean,
-    val debitorList: ArrayList<Long>,
-    val partyList: ArrayList<Long>,
-    val image: ByteArray
-)
+    val imageUrl: String?
+) {
+    constructor() : this("", "", null, null)
+}

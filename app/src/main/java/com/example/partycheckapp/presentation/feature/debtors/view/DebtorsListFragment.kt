@@ -2,7 +2,6 @@ package com.example.partycheckapp.presentation.feature.party.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,17 +13,31 @@ import com.example.partycheckapp.presentation.feature.debtors.adapter.DebtorsLis
 import com.example.partycheckapp.presentation.feature.debtors.presenter.DebtorsListPresenter
 import kotlinx.android.synthetic.main.user_list.*
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.example.partycheckapp.PartyApp
+import javax.inject.Inject
 
 
 class DebtorsListFragment : MvpAppCompatFragment(), DebtorsListView {
 
+    @Inject
     @InjectPresenter
-    lateinit var partyListPresenter: DebtorsListPresenter
+    lateinit var debtorsListPresenter: DebtorsListPresenter
+
+    @ProvidePresenter
+    fun initPresenter() = debtorsListPresenter
+
 
     private val recyclerAdapter = DebtorsListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        PartyApp
+            .instance
+            .getAppComponent()
+            .dateComponent()
+            .build()
+            .inject(this)
+
         super.onCreate(savedInstanceState)
     }
 
@@ -39,7 +52,7 @@ class DebtorsListFragment : MvpAppCompatFragment(), DebtorsListView {
         val manager = LinearLayoutManager(context)
         recycler_view.adapter = recyclerAdapter
         recycler_view.layoutManager = manager
-        partyListPresenter.setUsersDebtorsList()
+        debtorsListPresenter.setUsersDebtorsList()
     }
 
     override fun showDebtorsList(dataList: ArrayList<UserDebtor>) {
