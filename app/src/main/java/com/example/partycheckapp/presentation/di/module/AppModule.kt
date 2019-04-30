@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -27,6 +28,10 @@ class AppModule(private val app: Application) {
     @Provides
     @Singleton
     fun provideDatabaseReference(): FirebaseFirestore = FirebaseFirestore.getInstance()
+
+    @Provides
+    @Singleton
+    fun providesFirebaseStorage(): FirebaseStorage = FirebaseStorage.getInstance()
 
     companion object {
         private const val PREFS_KEY = "com.user.prefs"

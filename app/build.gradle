@@ -27,12 +27,16 @@ android {
 dependencies {
 
     // Firebase
+    implementation 'com.google.firebase:firebase-storage:16.1.0'
     implementation 'com.google.firebase:firebase-firestore:18.2.0'
     implementation "com.google.firebase:firebase-core:16.0.8"
     implementation 'com.google.firebase:firebase-auth:16.2.1'
 
     //navigation
     implementation "ru.terrakok.cicerone:cicerone:5.0.0"
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     //DI
     implementation 'com.google.dagger:dagger:2.16'

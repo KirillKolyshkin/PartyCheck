@@ -9,4 +9,5 @@ import com.example.partycheckapp.data.user.User
 @StateStrategyType(value = AddToEndSingleStrategy::class)
 interface ProfileView : MvpView {
     fun setUser(user: User?)
+    fun showDialog()
 }

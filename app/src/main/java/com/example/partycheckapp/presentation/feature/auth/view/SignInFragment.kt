@@ -73,12 +73,7 @@ class SignInFragment : SignInView, MvpAppCompatFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         if (requestCode == 228) {
             val password = data.getStringExtra("VERIFICATION_CODE")
-
-            val login = et_login.text.toString().trim { it <= ' ' }
-            val phone = et_phone.text.toString().trim { it <= ' ' }
-            //create user
             signInPresenter.verifyPhone(password)
-            signInPresenter.addUserToDB(login, phone)
             checkUser()
         }
     }
@@ -109,16 +104,19 @@ class SignInFragment : SignInView, MvpAppCompatFragment() {
     override fun checkUser() {
         var curUser = signInPresenter.getUser()
         if (curUser != null) {
-            enterApp()
+            enterTheApp()
         } else {
         }
     }
 
     override fun confirmAuth() {
-        enterApp()
+        val login = et_login.text.toString().trim { it <= ' ' }
+        val phone = et_phone.text.toString().trim { it <= ' ' }
+        signInPresenter.addUserToDB(login, phone)
+        enterTheApp()
     }
 
-    fun enterApp() {
+    fun enterTheApp(){
         startActivity(Intent(context, MainActivity::class.java))
     }
 
