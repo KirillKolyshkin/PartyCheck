@@ -1,17 +1,28 @@
 package com.example.partycheckapp.data.party
 
+import com.example.partycheckapp.data.user.User
 import java.util.*
 import kotlin.collections.ArrayList
 
-data class Party (
-    val id: Long,
+data class Party(
     val title: String,
     val description: String?,
     val location: String,
     val date: Date,
     val password: String,
-    val organization: String,
-    val participantList: ArrayList<Long>,
-    val purchaseList: ArrayList<Long>,
-    val image: ByteArray?
-)
+    val owner: User,
+    val users: List<User>,
+    val purchaseList: List<Purchase>,
+    val imageUrl: String?
+) {
+    constructor() : this(
+        "",
+        "",
+        "",
+        Date(),
+        "",
+        User(),
+        ArrayList<User>(),
+        ArrayList<Purchase>(),
+        null)
+}

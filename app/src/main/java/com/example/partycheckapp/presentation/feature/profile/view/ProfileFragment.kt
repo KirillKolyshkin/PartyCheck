@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -19,16 +20,14 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.partycheckapp.PartyApp
 import com.example.partycheckapp.data.user.User
-import com.example.partycheckapp.presentation.feature.profile.dialog.PhotoDialog
 import com.example.partycheckapp.presentation.feature.profile.presenter.ProfilePresenter
 import javax.inject.Inject
 import android.net.Uri
 import java.io.File
 import android.provider.MediaStore
-import com.google.android.gms.tasks.OnSuccessListener
+import androidx.appcompat.app.AlertDialog
 import com.squareup.picasso.Picasso
 import java.lang.Exception
-import com.google.firebase.storage.FirebaseStorage
 
 
 class ProfileFragment : MvpAppCompatFragment(), ProfileView {
@@ -90,11 +89,13 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
 
         when (editFieldsMode) {
             true -> {
+                ib_edit.setImageResource(R.drawable.ic_save_black_24dp)
                 et_phone_num.keyListener = et_phone_num.tag as KeyListener?
                 et_card_num.keyListener = et_card_num.tag as KeyListener?
                 iv_photo.setOnClickListener { showDialog() }
             }
             false -> {
+                ib_edit.setImageResource(R.drawable.ic_mode_edit_black_24dp)
                 updateUser()
                 et_phone_num.keyListener = null
                 et_card_num.keyListener = null
@@ -105,9 +106,12 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     }
 
     override fun showDialog() {
-        val dlg1 = PhotoDialog()
-        dlg1.setTargetFragment(this, 228)
-        dlg1.show(fragmentManager, "dlg1")
+        val ad = context?.let { AlertDialog.Builder(it) }
+        ad?.setTitle("Choose Type")  // заголовок
+        ad?.setPositiveButton("Camera") { dialog, arg1 -> takePhoto() }
+        ad?.setNegativeButton("Gallery"
+        ) { dialog, arg1 -> chooseFromDevise() }
+        ad?.show()
     }
 
     fun takePhoto() {
@@ -144,17 +148,6 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
                         selectedImageUri = Uri.fromFile(f)
                     }
                     iv_photo.setImageURI(selectedImageUri)
-                }
-            }
-            228 -> {
-                val response = data?.getIntExtra("option", 0)
-                when (response) {
-                    0 -> {
-                        takePhoto()
-                    }
-                    1 -> {
-                        chooseFromDevise()
-                    }
                 }
             }
         }
@@ -202,7 +195,6 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     }
 
     companion object {
-
         fun newInstance(): ProfileFragment {
             return ProfileFragment()
         }

@@ -15,18 +15,18 @@
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentTop="true"
                     android:textSize="24sp"
-                    android:layout_marginTop="40sp"
+                    android:layout_marginTop="40dp"
                     android:textColor="@color/colorPrimaryText"
             />
 
             <ImageView
                     android:id="@+id/iv_icon"
-                    android:layout_height="90sp"
-                    android:layout_width="90sp"
+                    android:layout_height="90dp"
+                    android:layout_width="90dp"
                     android:src="@drawable/ic_party"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/tv_welcome"
-                    android:layout_marginTop="60sp"
+                    android:layout_marginTop="60dp"
             />
 
 
@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/iv_icon"
-                    android:layout_marginTop="60sp">
+                    android:layout_marginTop="60dp">
                 <EditText
                         android:id="@+id/et_login"
                         android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                     android:id="@+id/ti_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15sp"
+                    android:layout_marginTop="15dp"
                     android:layout_below="@+id/ti_login"
                     android:layout_centerHorizontal="true">
                 <EditText
@@ -70,14 +70,14 @@
             <Button
                     android:id="@+id/btn_sign_in"
                     style="@style/ButtonMain"
-                    android:layout_width="280sp"
-                    android:layout_height="40sp"
+                    android:layout_width="280dp"
+                    android:layout_height="40dp"
                     android:text="@string/sign_in_btn"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/ti_phone"
                     android:textSize="20sp"
                     android:textColor="@color/colorWhite"
-                    android:layout_marginTop="60sp"
+                    android:layout_marginTop="60dp"
             />
         </RelativeLayout>
     </ScrollView>

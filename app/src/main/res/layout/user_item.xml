@@ -8,9 +8,9 @@
     <ImageView
             android:id="@+id/iv_user_icon"
             android:layout_width="56sp"
-            android:layout_height="56sp"
+            android:layout_height="56dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="16sp"/>
+            android:layout_marginStart="16dp"/>
 
     <TextView
             android:id="@+id/tv_name"
@@ -19,8 +19,8 @@
             android:textSize="24sp"
             android:layout_toEndOf="@id/iv_user_icon"
             android:textColor="@color/colorPrimaryText"
-            android:layout_marginTop="8sp"
-            android:layout_marginStart="16sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
             tools:text="Louis Armstrong" />
 
     <TextView
@@ -38,8 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:layout_marginTop="4sp"
-            android:layout_marginEnd="8sp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
             android:layout_alignParentEnd="true"
             android:textColor="@color/colorGreenNumber"
             tools:text="+18.54$" />

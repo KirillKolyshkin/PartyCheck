@@ -72,6 +72,4 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    companion object {
-    }
 }

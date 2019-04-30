@@ -11,6 +11,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.partycheckapp.R
 import com.example.partycheckapp.data.party.PartyWithDebt
+import com.example.partycheckapp.presentation.feature.main.activity.MainActivity
 import com.example.partycheckapp.presentation.feature.party.adapter.PartyListAdapter
 import com.example.partycheckapp.presentation.feature.party.addparty.AddPartyActivity
 import com.example.partycheckapp.presentation.feature.party.presenter.PartyListPresenter

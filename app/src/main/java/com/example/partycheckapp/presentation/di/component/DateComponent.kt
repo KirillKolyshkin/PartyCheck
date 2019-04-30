@@ -5,6 +5,8 @@ import com.example.partycheckapp.presentation.di.module.InteractorModule
 import com.example.partycheckapp.presentation.di.module.PartyModule
 import com.example.partycheckapp.presentation.di.module.PresenterModule
 import com.example.partycheckapp.presentation.feature.auth.view.SignInFragment
+import com.example.partycheckapp.presentation.feature.party.addparty.AddPartyActivity
+import com.example.partycheckapp.presentation.feature.party.addparty.AddPartyFragment
 import com.example.partycheckapp.presentation.feature.party.view.DebtorsListFragment
 import com.example.partycheckapp.presentation.feature.party.view.PartyListFragment
 import com.example.partycheckapp.presentation.feature.profile.view.ProfileFragment
@@ -18,6 +20,7 @@ interface DateComponent {
     fun inject(debtorsListFragment: DebtorsListFragment)
     fun inject(signInFragment: SignInFragment)
     fun inject(profileFragment: ProfileFragment)
+    fun inject(addPartyFragment: AddPartyFragment)
 
     @Subcomponent.Builder
     interface Builder {

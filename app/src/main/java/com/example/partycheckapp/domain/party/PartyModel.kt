@@ -2,6 +2,7 @@ package com.example.partycheckapp.domain.party
 
 import com.example.partycheckapp.data.party.Party
 import com.example.partycheckapp.data.party.PartyWithDebt
+import com.example.partycheckapp.data.user.User
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.random.Random
@@ -15,8 +16,8 @@ class PartyModel {
             list.add(item.toLong())
 
         return Party(
-            1, "MyPartyTest", "SomeDescription", "Itis", Date(12272000), "a", "best people",
-            list, list, null
+             "MyPartyTest", "SomeDescription", "Itis", Date(12272000), "a", User(),
+            ArrayList<User>(), ArrayList(), null
         )
     }
 
