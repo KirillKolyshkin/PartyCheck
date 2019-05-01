@@ -29,7 +29,6 @@ import androidx.appcompat.app.AlertDialog
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
-
 class ProfileFragment : MvpAppCompatFragment(), ProfileView {
 
     @Inject
@@ -42,15 +41,12 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     private var editFieldsMode = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         PartyApp.instance
             .getAppComponent()
             .dateComponent()
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -84,44 +80,42 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
         }
     }
 
-    fun changeFocusable() {
+    private fun changeFocusable() {
         editFieldsMode = !editFieldsMode
 
-        when (editFieldsMode) {
-            true -> {
-                ib_edit.setImageResource(R.drawable.ic_save_black_24dp)
-                et_phone_num.keyListener = et_phone_num.tag as KeyListener?
-                et_card_num.keyListener = et_card_num.tag as KeyListener?
-                iv_photo.setOnClickListener { showDialog() }
-            }
-            false -> {
-                ib_edit.setImageResource(R.drawable.ic_mode_edit_black_24dp)
-                updateUser()
-                et_phone_num.keyListener = null
-                et_card_num.keyListener = null
-                iv_photo.setOnClickListener { }
-                this.context?.let { view?.let { it1 -> hideKeyboardFrom(it, it1) } }
-            }
+        if (editFieldsMode) {
+            ib_edit.setImageResource(R.drawable.ic_save_black_24dp)
+            et_phone_num.keyListener = et_phone_num.tag as KeyListener?
+            et_card_num.keyListener = et_card_num.tag as KeyListener?
+            iv_photo.setOnClickListener { showDialog() }
+        } else if (!editFieldsMode) {
+            ib_edit.setImageResource(R.drawable.ic_mode_edit_black_24dp)
+            updateUser()
+            et_phone_num.keyListener = null
+            et_card_num.keyListener = null
+            iv_photo.setOnClickListener { }
+            this.context?.let { view?.let { it1 -> hideKeyboardFrom(it, it1) } }
         }
     }
 
     override fun showDialog() {
-        val ad = context?.let { AlertDialog.Builder(it) }
-        ad?.setTitle("Choose Type")  // заголовок
-        ad?.setPositiveButton("Camera") { dialog, arg1 -> takePhoto() }
-        ad?.setNegativeButton("Gallery"
-        ) { dialog, arg1 -> chooseFromDevise() }
-        ad?.show()
+        val ad = context?.let {
+            AlertDialog.Builder(it)
+                .setTitle("Choose Type")  // заголовок
+                .setPositiveButton("Camera") { dialog, arg1 -> takePhoto() }
+                .setNegativeButton(
+                    "Gallery"
+                ) { dialog, arg1 -> chooseFromDevise() }
+                .show()
+        }
     }
 
     fun takePhoto() {
-        val TAKE_PICTURE = 100
         val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, TAKE_PICTURE)
     }
 
     fun chooseFromDevise() {
-        val REQUEST_GET_SINGLE_FILE = 200
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "image/*"
@@ -195,8 +189,8 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     }
 
     companion object {
-        fun newInstance(): ProfileFragment {
-            return ProfileFragment()
-        }
+        val TAKE_PICTURE = 100
+        val REQUEST_GET_SINGLE_FILE = 200
+        fun newInstance(): ProfileFragment = ProfileFragment()
     }
 }

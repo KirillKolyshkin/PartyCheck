@@ -6,7 +6,6 @@ import com.arellomobile.mvp.MvpPresenter
 import com.example.partycheckapp.domain.bd.DBProvider
 import java.util.*
 
-
 @InjectViewState
 class AddPartyPresenter(private val dbProvider: DBProvider): MvpPresenter<AddPartyView>() {
 

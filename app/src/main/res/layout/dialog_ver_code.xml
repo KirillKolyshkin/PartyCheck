@@ -20,8 +20,7 @@
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
                 android:focusableInTouchMode="true"
-                android:hint="@string/password"
-        />
+                android:hint="@string/password"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

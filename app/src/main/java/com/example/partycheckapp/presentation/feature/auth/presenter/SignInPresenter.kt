@@ -7,7 +7,6 @@ import com.example.partycheckapp.domain.user.UserInteractor
 import com.example.partycheckapp.presentation.feature.auth.view.SignInView
 import io.reactivex.rxkotlin.subscribeBy
 
-
 @InjectViewState
 class SignInPresenter(private val interactor: UserInteractor, private val provider: DBProvider) : MvpPresenter<SignInView>() {
 

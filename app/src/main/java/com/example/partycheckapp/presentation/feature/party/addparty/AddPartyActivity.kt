@@ -9,9 +9,6 @@ import android.view.View
 import com.example.partycheckapp.presentation.feature.main.activity.MainActivity
 import kotlinx.android.synthetic.main.main_activity_view.*
 
-
-
-
 class AddPartyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

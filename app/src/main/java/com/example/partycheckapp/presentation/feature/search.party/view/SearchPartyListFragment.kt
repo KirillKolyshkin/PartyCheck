@@ -12,7 +12,7 @@ import com.example.partycheckapp.R
 import com.example.partycheckapp.data.party.Party
 import com.example.partycheckapp.presentation.feature.searchParty.adapter.PartySearchListAdapter
 import com.example.partycheckapp.presentation.feature.searchParty.presenter.PartyListPresenter
-import kotlinx.android.synthetic.main.party_list.*
+import kotlinx.android.synthetic.main.fragment_party_list.*
 
 class SearchPartyListFragment : MvpAppCompatFragment(),
     SearchPartyListView {
@@ -27,7 +27,7 @@ class SearchPartyListFragment : MvpAppCompatFragment(),
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.party_list, container, false)
+        inflater.inflate(R.layout.fragment_party_list, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

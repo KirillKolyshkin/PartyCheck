@@ -121,11 +121,6 @@ class SignInFragment : SignInView, MvpAppCompatFragment() {
     }
 
     companion object {
-        fun newInstance(): SignInFragment {
-            val args = Bundle()
-            val fragment = SignInFragment()
-            fragment.arguments = args
-            return fragment
-        }
+        fun newInstance(): SignInFragment = SignInFragment()
     }
 }

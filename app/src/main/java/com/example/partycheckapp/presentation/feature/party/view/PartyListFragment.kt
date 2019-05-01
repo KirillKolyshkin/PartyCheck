@@ -11,11 +11,10 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.example.partycheckapp.R
 import com.example.partycheckapp.data.party.PartyWithDebt
-import com.example.partycheckapp.presentation.feature.main.activity.MainActivity
 import com.example.partycheckapp.presentation.feature.party.adapter.PartyListAdapter
 import com.example.partycheckapp.presentation.feature.party.addparty.AddPartyActivity
 import com.example.partycheckapp.presentation.feature.party.presenter.PartyListPresenter
-import kotlinx.android.synthetic.main.my_party_list.*
+import kotlinx.android.synthetic.main.fragmet_my_party_list.*
 
 class PartyListFragment : MvpAppCompatFragment(), PartyListView {
 
@@ -25,7 +24,7 @@ class PartyListFragment : MvpAppCompatFragment(), PartyListView {
     private val recyclerAdapter = PartyListAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.my_party_list, container, false)
+        inflater.inflate(R.layout.fragmet_my_party_list, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

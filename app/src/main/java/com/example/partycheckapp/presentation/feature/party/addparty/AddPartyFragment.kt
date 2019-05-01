@@ -69,13 +69,11 @@ class AddPartyFragment: MvpAppCompatFragment(), AddPartyView {
     }
 
     fun takePhoto() {
-        val TAKE_PICTURE = 100
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, TAKE_PICTURE)
     }
 
     fun chooseFromDevise() {
-        val REQUEST_GET_SINGLE_FILE = 200
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "image/*"
@@ -204,8 +202,8 @@ class AddPartyFragment: MvpAppCompatFragment(), AddPartyView {
     }
 
     companion object {
-        fun newInstance(): AddPartyFragment {
-            return AddPartyFragment()
-        }
+        const val TAKE_PICTURE = 100
+        const val REQUEST_GET_SINGLE_FILE = 200
+        fun newInstance(): AddPartyFragment = AddPartyFragment()
     }
 }

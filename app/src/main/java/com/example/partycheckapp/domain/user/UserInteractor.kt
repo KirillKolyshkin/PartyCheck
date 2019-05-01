@@ -11,7 +11,8 @@ import io.reactivex.Maybe
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
-class UserInteractor(private val auth: FirebaseAuth, private val sharedPreferences: SharedPreferences) {
+class UserInteractor(private val auth: FirebaseAuth,
+                     private val sharedPreferences: SharedPreferences) {
 
     fun getDebtor(): UserDebtor {
 

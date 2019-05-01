@@ -38,7 +38,6 @@ class DBProvider(
         }
     }
 
-
     fun tryToAddImageToStorage(bitmap: Bitmap?, name: String): Maybe<String> {
         return Maybe.create { emmiter ->
             if (bitmap != null) {
@@ -189,8 +188,8 @@ class DBProvider(
 
     }
 
-    fun getCurrentUser(): Maybe<User> {
-        return Maybe.create { emmiter ->
+    fun getCurrentUser(): Maybe<User> =
+        Maybe.create { emmiter ->
             val userId = sharedPreferences.getString(CURRENT_USER, "")
             val docRef = database.collection("users").document(userId)
             docRef.get()
@@ -202,7 +201,6 @@ class DBProvider(
                     Log.w(TAG, "Error adding document", e)
                 }
         }
-    }
 
     companion object {
         const val CURRENT_USER = "current_user_id"
