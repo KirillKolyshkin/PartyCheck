@@ -6,6 +6,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.constraintlayout.widget.Constraints.TAG
 import com.example.partycheckapp.data.party.Party
+import com.example.partycheckapp.data.party.Purchase
 import com.example.partycheckapp.data.user.User
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -76,6 +77,7 @@ class DBProvider(
                     val users = ArrayList<User>()
                     users.add(user)
                     val party = Party(
+                        newPartyRef.id,
                         title,
                         description,
                         location,
@@ -97,6 +99,7 @@ class DBProvider(
                     val users = ArrayList<User>()
                     users.add(user)
                     val party = Party(
+                        newPartyRef.toString(),
                         title,
                         description,
                         location,
@@ -148,9 +151,60 @@ class DBProvider(
         }
     }
 
+    fun getAllParties(): Maybe<ArrayList<Party>> =
+        Maybe.create { emitter ->
+            database.collection("parties")
+                .get()
+                .addOnSuccessListener { result ->
+                    val partyList: ArrayList<Party> = ArrayList()
+                    for (document in result) {
+                        partyList.add(document.toObject(Party::class.java))
+                        Log.d(TAG, "${document.id} => ${document.data}")
+                    }
+                    emitter.onSuccess(partyList)
+                }
+                .addOnFailureListener { exception ->
+                    Log.d(TAG, "Error getting documents: ", exception)
+                    emitter.onError(exception)
+                }
+        }
+
+    fun getParty(partyId: String): Maybe<Party> =
+        Maybe.create { emitter ->
+            database.collection("parties").document(partyId).get()
+                .addOnSuccessListener { documentSnapshot ->
+                    val party = documentSnapshot.toObject(Party::class.java)
+                    party?.let { emitter.onSuccess(it) }
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                }
+        }
+
+    fun getPurchase(partyId: String): Maybe<ArrayList<Purchase>> =
+            Maybe.create{emitter ->
+                database.collection("parties")
+                    .document(partyId)
+                    .collection("purchaseList")
+                    .get()
+                    .addOnSuccessListener { result ->
+                        val purchaseList: ArrayList<Purchase> = ArrayList()
+                        for (document in result) {
+                            purchaseList.add(document.toObject(Purchase::class.java))
+                            Log.d(TAG, "${document.id} => ${document.data}")
+                        }
+                        emitter.onSuccess(purchaseList)
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.d(TAG, "Error getting documents: ", exception)
+                        emitter.onError(exception)
+                    }
+            }
+
+
     fun getUserParties(): Maybe<ArrayList<Party>> {
         val userId = sharedPreferences.getString(CURRENT_USER, "")
-        return Maybe.create { emmiter ->
+        return Maybe.create { emitter ->
             val docRef = database.collection("users")
                 .document(userId)
                 .collection("parties")
@@ -158,15 +212,14 @@ class DBProvider(
                 .addOnSuccessListener { result ->
                     val partyList: ArrayList<Party> = ArrayList()
                     for (document in result) {
-                        partyList.add(document as Party)
+                        partyList.add(document.toObject(Party::class.java))
                         Log.d(TAG, "${document.id} => ${document.data}")
                     }
-
-                    emmiter.onSuccess(partyList)
+                    emitter.onSuccess(partyList)
                 }
                 .addOnFailureListener { exception ->
                     Log.d(TAG, "Error getting documents: ", exception)
-                    emmiter.onError(exception)
+                    emitter.onError(exception)
                 }
         }
     }
@@ -189,13 +242,13 @@ class DBProvider(
     }
 
     fun getCurrentUser(): Maybe<User> =
-        Maybe.create { emmiter ->
+        Maybe.create { emitter ->
             val userId = sharedPreferences.getString(CURRENT_USER, "")
             val docRef = database.collection("users").document(userId)
             docRef.get()
                 .addOnSuccessListener { documentSnapshot ->
                     val user = documentSnapshot.toObject(User::class.java)
-                    user?.let { emmiter.onSuccess(it) }
+                    user?.let { emitter.onSuccess(it) }
                 }
                 .addOnFailureListener { e ->
                     Log.w(TAG, "Error adding document", e)

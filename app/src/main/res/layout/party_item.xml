@@ -5,19 +5,19 @@
                 android:layout_height="88sp"
                 android:padding="8dp">
 
-    <ImageView
-            android:id="@+id/iv_user_icon"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_party_icon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginStart="8dp"/>
 
     <TextView
             android:id="@+id/tv_party_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:layout_toEndOf="@id/iv_user_icon"
+            android:layout_toEndOf="@id/iv_party_icon"
             android:textColor="@color/colorPrimaryText"
             android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
@@ -43,4 +43,16 @@
             android:layout_alignParentEnd="true"
             android:textColor="@color/colorSecondaryText"
             tools:text="2 your friends " />
+
+    <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_below="@+id/tv_friends_amount"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorSecondaryText"
+            tools:text="24.02.2000"/>
 </RelativeLayout>

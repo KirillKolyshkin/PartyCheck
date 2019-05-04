@@ -6,9 +6,9 @@ import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import com.example.partycheckapp.R
 import com.example.partycheckapp.presentation.feature.party.view.DebtorsListFragment
-import com.example.partycheckapp.presentation.feature.profile.view.ProfileFragment
-import com.example.partycheckapp.presentation.feature.party.view.PartyListFragment
-import com.example.partycheckapp.presentation.feature.searchParty.view.SearchPartyListFragment
+import com.example.partycheckapp.presentation.feature.profile.ProfileFragment
+import com.example.partycheckapp.presentation.feature.party.partylist.PartyListFragment
+import com.example.partycheckapp.presentation.feature.search.party.SearchPartyListFragment
 import kotlinx.android.synthetic.main.main_activity_view.*
 
 
