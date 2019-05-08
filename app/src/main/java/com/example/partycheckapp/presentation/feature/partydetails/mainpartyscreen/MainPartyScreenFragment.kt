@@ -21,8 +21,6 @@ import kotlinx.android.synthetic.main.fragment_party_details.*
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import ru.terrakok.cicerone.commands.Back
-
 
 class MainPartyScreenFragment : MvpAppCompatFragment(), MainPartyScreenView {
 
@@ -36,7 +34,7 @@ class MainPartyScreenFragment : MvpAppCompatFragment(), MainPartyScreenView {
     override fun onCreate(savedInstanceState: Bundle?) {
         PartyApp.instance
             .getAppComponent()
-            .dateComponent()
+            .partyDetailsComponent()
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
@@ -65,7 +63,6 @@ class MainPartyScreenFragment : MvpAppCompatFragment(), MainPartyScreenView {
             collapsingToolbar.setExpandedTitleColor(it)
             collapsingToolbar.setCollapsedTitleTextColor(it)}
     }
-
 
     private fun initClickListeners() {
         var purchaseId = arguments?.getString("party_id")?:""

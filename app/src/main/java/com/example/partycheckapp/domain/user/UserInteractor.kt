@@ -14,21 +14,6 @@ import kotlin.random.Random
 class UserInteractor(private val auth: FirebaseAuth,
                      private val sharedPreferences: SharedPreferences) {
 
-    fun getDebtor(): UserDebtor {
-
-        return UserDebtor(
-            1, "UserName", 88005553535, 5555, Random.nextDouble(-100.0, 100.0)
-        )
-    }
-
-    fun getTestDebtors(): ArrayList<UserDebtor> {
-        val list = java.util.ArrayList<UserDebtor>()
-        for (item: Int in 1..10) {
-            list.add(getDebtor())
-        }
-        return list
-    }
-
     fun sentCode(phone: String): Maybe<String> {
 
         return Maybe.create { emitter ->

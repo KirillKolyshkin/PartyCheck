@@ -18,6 +18,6 @@ class ProfilePresenter(private val dbProvider: DBProvider) : MvpPresenter<Profil
         getUser()
     }
 
-    fun updateUSer(name: String, phone: String, cardNumber: Long?, bitmap: Bitmap?) =
+    fun updateUSer(name: String, phone: String, cardNumber: String?, bitmap: Bitmap?) =
         dbProvider.updateCurrentUser(name, phone, cardNumber, bitmap)
 }

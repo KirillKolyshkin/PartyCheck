@@ -8,4 +8,5 @@ import com.example.partycheckapp.data.party.Party
 @StateStrategyType(value = AddToEndSingleStrategy::class)
 interface SearchPartyListView : MvpView {
     fun showPartyList(dataList: ArrayList<Party>)
+    fun getUserPartyList(dataList: ArrayList<Party>)
 }

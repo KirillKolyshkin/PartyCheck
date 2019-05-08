@@ -15,12 +15,8 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val sdf = SimpleDateFormat("dd/M/yyyy")
             val currentDate = sdf.format(party.date)
             tv_date.text = currentDate
-            tv_org_name.text = party.owner.name
             tv_friends_amount.text = USERS_COUNT.format(party.users.count())
-            try {
-                val uri: Uri = Uri.parse(party.imageUrl)
-                Picasso.with(context).load(uri).into(iv_party_icon)
-            } catch (e: Exception) { }
+            Picasso.with(context).load(party.imageUrl).into(iv_party_icon)
         }
     }
 

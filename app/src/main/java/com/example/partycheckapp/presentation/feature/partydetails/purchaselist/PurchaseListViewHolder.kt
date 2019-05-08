@@ -13,14 +13,11 @@ class PurchaseListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
             tv_purchase_name.text = purchase.title
             tv_creditor_name.text = purchase.creditor.name
             tv_price.text = USERS_COUNT.format(purchase.price)
-            try {
-                val uri: Uri = Uri.parse(purchase.imageUrl)
-                Picasso.with(context).load(uri).into(iv_purchase_icon)
-            } catch (e: Exception) { }
+            Picasso.with(context).load(purchase.imageUrl).into(iv_purchase_icon)
         }
     }
 
     companion object {
-        private const val USERS_COUNT = "%f0.2"
+        private const val USERS_COUNT = "%.2f $"
     }
 }

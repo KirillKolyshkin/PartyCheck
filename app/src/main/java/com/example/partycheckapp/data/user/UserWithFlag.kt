@@ -5,10 +5,9 @@ import com.example.partycheckapp.data.party.Party
 data class UserWithFlag(
     val name: String,
     val phoneNumber: String,
-    val cardNumber: Long?,
+    val cardNumber: String?,
     val imageUrl: String?,
-    val parties: List<Party>,
     var flag: Boolean
 ) {
-    constructor() : this("", "", null, null, ArrayList<Party>(), false)
+    constructor() : this("", "", null, null, false)
 }

@@ -15,6 +15,12 @@ import com.example.partycheckapp.R
 import com.example.partycheckapp.data.party.Party
 import kotlinx.android.synthetic.main.fragment_party_list.*
 import javax.inject.Inject
+import android.content.DialogInterface
+import android.content.Intent
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
+import com.example.partycheckapp.presentation.feature.partydetails.PartyDetailsActivity
+
 
 class SearchPartyListFragment : MvpAppCompatFragment(),
     SearchPartyListView,
@@ -27,12 +33,12 @@ class SearchPartyListFragment : MvpAppCompatFragment(),
     @ProvidePresenter
     fun initPresenter() = searchPartyListPresenter
 
-    private val searchPartyListAdapter = PartySearchListAdapter()
+    private val searchPartyListAdapter = PartySearchListAdapter { onItemClick(it) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         PartyApp.instance
             .getAppComponent()
-            .dateComponent()
+            .mainActivityComponent()
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
@@ -48,6 +54,7 @@ class SearchPartyListFragment : MvpAppCompatFragment(),
                 this.context, resources.configuration.orientation
             )
         )
+        searchPartyListPresenter.getUserPartyList()
         val manager = LinearLayoutManager(context)
         recycler_view.adapter = searchPartyListAdapter
         recycler_view.layoutManager = manager
@@ -60,6 +67,52 @@ class SearchPartyListFragment : MvpAppCompatFragment(),
         searchPartyListPresenter.setPartySearchList()
     }
 
+    private fun onItemClick(party: Party) {
+        var flag = true
+        for (_party in dataList)
+            if (_party.ref == party.ref)
+                flag = false
+        if (flag)
+            showDialog(party)
+        else {
+            val intent = Intent(activity, PartyDetailsActivity::class.java)
+            intent.putExtra("party_id", party.ref)
+            startActivity(intent)
+        }
+    }
+
+    private fun showDialog(party: Party) {
+        val alert = context?.let { AlertDialog.Builder(it) }
+        if (alert != null) {
+            alert.setTitle("Password Confirm")
+
+            alert.setMessage("Enter Party Passowrd")
+
+            val input = EditText(context)
+            alert.setView(input)
+
+            alert.setPositiveButton("Ok", DialogInterface.OnClickListener { _, whichButton ->
+                val partyPassword = input.text.toString()
+                if (partyPassword == party.password) {
+                    party.ref?.let { searchPartyListPresenter.addUserToParty(it) }
+                    val intent = Intent(activity, PartyDetailsActivity::class.java)
+                    intent.putExtra("party_id", party.ref)
+                    startActivity(intent)
+                }
+            })
+
+            alert.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, whichButton ->
+                dialog.dismiss()
+            })
+
+            alert.show()
+        }
+    }
+
+    override fun getUserPartyList(parties: ArrayList<Party>) {
+        dataList = parties
+    }
+
     override fun showPartyList(dataList: ArrayList<Party>) {
         searchPartyListAdapter.list = dataList
         searchPartyListAdapter.notifyDataSetChanged()
@@ -67,6 +120,7 @@ class SearchPartyListFragment : MvpAppCompatFragment(),
     }
 
     companion object {
+        var dataList = ArrayList<Party>()
         fun newInstance(): SearchPartyListFragment =
             SearchPartyListFragment()
     }

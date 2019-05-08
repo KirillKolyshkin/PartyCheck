@@ -12,7 +12,6 @@ data class Party(
     val location: String,
     val date: Date,
     val password: String,
-    val owner: User,
     val users: List<User>,
     val purchaseList: List<Purchase>,
     val imageUrl: String?
@@ -24,7 +23,6 @@ data class Party(
         "",
         Date(),
         "",
-        User(),
         ArrayList<User>(),
         ArrayList<Purchase>(),
         null)

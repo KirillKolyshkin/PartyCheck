@@ -38,7 +38,7 @@ class AddPartyFragment: MvpAppCompatFragment(), AddPartyView {
     override fun onCreate(savedInstanceState: Bundle?) {
         PartyApp.instance
             .getAppComponent()
-            .dateComponent()
+            .addPartyComponent()
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)

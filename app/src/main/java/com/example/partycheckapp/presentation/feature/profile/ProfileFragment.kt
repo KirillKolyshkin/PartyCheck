@@ -42,7 +42,7 @@ class ProfileFragment : MvpAppCompatFragment(),
     override fun onCreate(savedInstanceState: Bundle?) {
         PartyApp.instance
             .getAppComponent()
-            .dateComponent()
+            .mainActivityComponent()
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
@@ -188,7 +188,7 @@ class ProfileFragment : MvpAppCompatFragment(),
             bitmap = null
         }
         //val bitmap = (iv_photo.drawable as BitmapDrawable).bitmap
-        profilePresenter.updateUSer(name, phone, card, bitmap)
+        profilePresenter.updateUSer(name, phone, card.toString(), bitmap)
     }
 
     companion object {

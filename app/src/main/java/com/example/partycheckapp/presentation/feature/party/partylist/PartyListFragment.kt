@@ -35,7 +35,7 @@ class PartyListFragment : MvpAppCompatFragment(),
     override fun onCreate(savedInstanceState: Bundle?) {
         PartyApp.instance
             .getAppComponent()
-            .dateComponent()
+            .mainActivityComponent()
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)

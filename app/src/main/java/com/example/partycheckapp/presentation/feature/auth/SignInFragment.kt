@@ -33,7 +33,7 @@ class SignInFragment : SignInView, MvpAppCompatFragment() {
         PartyApp
             .instance
             .getAppComponent()
-            .dateComponent()
+            .signInComponent()
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)

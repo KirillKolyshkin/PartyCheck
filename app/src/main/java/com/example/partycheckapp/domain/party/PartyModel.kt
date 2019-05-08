@@ -16,7 +16,7 @@ class PartyModel {
             list.add(item.toLong())
 
         return Party(
-             "", "MyPartyTest", "SomeDescription", "Itis", Date(12272000), "a", User(),
+             "", "MyPartyTest", "SomeDescription", "Itis", Date(12272000), "a",
             ArrayList(), ArrayList(), null
         )
     }

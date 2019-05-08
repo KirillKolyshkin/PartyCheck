@@ -7,7 +7,7 @@ import com.example.partycheckapp.R
 import com.example.partycheckapp.data.party.Party
 import com.example.partycheckapp.presentation.feature.search.party.ViewHolder
 
-class PartySearchListAdapter : RecyclerView.Adapter<ViewHolder>() {
+class PartySearchListAdapter(private var onItemClick: (Party) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
 
     var list: ArrayList<Party> = arrayListOf()
     override fun getItemCount() = list.size
@@ -26,6 +26,6 @@ class PartySearchListAdapter : RecyclerView.Adapter<ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindViews(list[position])
-        //holder.itemView.setOnClickListener { onItemClick(list[position]) }
+        holder.itemView.setOnClickListener { onItemClick(list[position]) }
     }
 }

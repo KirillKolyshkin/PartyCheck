@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.AppBarLayout
                     android:id="@+id/appbar"
@@ -76,6 +74,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
                     android:layout_below="@+id/tv_depositors"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:nestedScrollingEnabled="true"
                     tools:listitem="@layout/user_item_for_purchase"/>
 
 
@@ -112,8 +113,7 @@
                     android:layout_below="@+id/iv_photo"
                     android:src="@drawable/ic_empty_profile_photo_24dp"
                     app:civ_border_width="1dp"
-                    app:civ_border_color="#FF000000"
-            />
+                    app:civ_border_color="#FF000000"/>
 
             <TextView
                     android:id="@+id/add_check_title"
@@ -142,5 +142,4 @@
                     android:layout_marginEnd="8dp"/>
 
         </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
-</RelativeLayout>
+    </ScrollView>

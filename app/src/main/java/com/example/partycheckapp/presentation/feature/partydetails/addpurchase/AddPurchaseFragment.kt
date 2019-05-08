@@ -1,6 +1,5 @@
 package com.example.partycheckapp.presentation.feature.partydetails.addpurchase
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -26,7 +25,6 @@ import com.example.partycheckapp.data.party.Party
 import com.example.partycheckapp.data.user.User
 import com.example.partycheckapp.data.user.UserWithFlag
 import com.example.partycheckapp.presentation.feature.partydetails.PartyDetailsActivity
-import com.example.partycheckapp.presentation.feature.partydetails.mainpartyscreen.MainPartyScreenFragment
 import com.example.partycheckapp.presentation.feature.partydetails.purchaselist.PurchaseListFragment
 import kotlinx.android.synthetic.main.fragment_add_purchase.*
 import java.io.File
@@ -45,7 +43,7 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         PartyApp.instance
             .getAppComponent()
-            .dateComponent()
+            .partyDetailsComponent()
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
@@ -122,19 +120,29 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
                 bitmap2 = null
             }
 
-            //addPartyPresenter.addParty(title, description, place, date, password, bitmap)
+            var users = addPurchaseAdapter.list
+            var chosenUsers = ArrayList<User>()
+            for (user in users)
+                if (user.flag)
+                    chosenUsers.add(parseFromUSerWithFlagTOUser(user))
 
-            var purchaseId = arguments?.getString("party_id") ?: ""
+            var partyId = arguments?.getString("party_id") ?: ""
+            addPurchasePresenter.addPurchase(partyId, title, price.toDouble(),chosenUsers, bitmap, bitmap2)
+
             fragmentManager?.let {
                 it.beginTransaction()
-                    .replace(R.id.container, PurchaseListFragment.newInstance(purchaseId))
+                    .replace(R.id.container, PurchaseListFragment.newInstance(partyId))
                     .commit()
             }
         }
     }
 
+    private fun parseFromUSerWithFlagTOUser(userWithFlag: UserWithFlag): User{
+        return User(userWithFlag.name, userWithFlag.phoneNumber, userWithFlag.cardNumber, userWithFlag.imageUrl)
+    }
+
     private fun parseFromUserToUserWithFlag(user: User): UserWithFlag {
-        return UserWithFlag(user.name, user.phoneNumber, user.cardNumber, user.imageUrl, user.parties, false)
+        return UserWithFlag(user.name, user.phoneNumber, user.cardNumber, user.imageUrl, false)
     }
 
     override fun getParty(party: Party) {

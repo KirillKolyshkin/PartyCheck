@@ -13,4 +13,12 @@ class SearchPartyListPresenter(private val dbProvider: DBProvider) : MvpPresente
             viewState.showPartyList(it)
         }
     )
+
+    fun getUserPartyList() = dbProvider.getUserParties().subscribeBy(
+        onSuccess = {
+            viewState.getUserPartyList(it)
+        }
+    )
+
+    fun addUserToParty(partyId: String) = dbProvider.addUserToParty(partyId)
 }

@@ -1,9 +1,9 @@
 package com.example.partycheckapp.data.party
 
+import android.os.Parcelable
 import com.example.partycheckapp.data.user.User
 
 data class Purchase(
-    val ref: String?,
     val title: String,
     val price: Double,
     val creditor: User,
@@ -12,7 +12,6 @@ data class Purchase(
     val checkUrl: String?
 ) {
     constructor() : this(
-        "",
         "title",
         0.0,
         User(),

@@ -33,4 +33,8 @@
     <string name="add_party">Add Party</string>
     <string name="error_pass_length">Password too short, enter minimum 6 characters!</string>
     <string name="error_signin">Sign In Error</string>
+    <string name="debt_size">Debt Size</string>
+    <string name="debt_repaid">Debt Repaid</string>
+    <string name="debt_approve">Wait approve from second side</string>
+    <string name="cancel">Cancel</string>
 </resources>

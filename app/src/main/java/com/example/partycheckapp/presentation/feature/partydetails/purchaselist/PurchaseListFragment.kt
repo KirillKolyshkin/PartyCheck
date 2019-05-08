@@ -16,6 +16,7 @@ import com.example.partycheckapp.data.party.Purchase
 import com.example.partycheckapp.presentation.feature.partydetails.PartyDetailsActivity
 import com.example.partycheckapp.presentation.feature.partydetails.addpurchase.AddPurchaseFragment
 import com.example.partycheckapp.presentation.feature.partydetails.mainpartyscreen.MainPartyScreenFragment
+import com.example.partycheckapp.presentation.feature.partydetails.purchasedetails.PurchaseDetailsFragment
 import kotlinx.android.synthetic.main.fragment_purchase_list.*
 import javax.inject.Inject
 
@@ -35,7 +36,7 @@ class PurchaseListFragment : MvpAppCompatFragment(),
     override fun onCreate(savedInstanceState: Bundle?) {
         PartyApp.instance
             .getAppComponent()
-            .dateComponent()
+            .partyDetailsComponent()
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
@@ -78,7 +79,7 @@ class PurchaseListFragment : MvpAppCompatFragment(),
     }
 
     private fun initClickListeners() {
-        var purchaseId = arguments?.getString("party_id")?:""
+        var purchaseId = arguments?.getString("party_id") ?: ""
         btn_add.setOnClickListener {
             fragmentManager?.let {
                 it.beginTransaction()
@@ -89,7 +90,13 @@ class PurchaseListFragment : MvpAppCompatFragment(),
     }
 
     private fun onItemClick(purchase: Purchase) {
-        //
+        arguments?.getString("party_id")?.let {partyId ->
+            fragmentManager?.let {
+                it.beginTransaction()
+                    .replace(R.id.container, PurchaseDetailsFragment.newInstance(partyId, purchase.title))
+                    .commit()
+            }
+        }
     }
 
     override fun onRefresh() {
