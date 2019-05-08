@@ -76,13 +76,7 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
         toolbar.title = "Add Purchase"
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
         toolbar.setNavigationOnClickListener {
-            var purchaseId = arguments?.getString("party_id") ?: ""
-            fragmentManager?.let {
-                it.beginTransaction()
-                    .replace(R.id.container, PurchaseListFragment.newInstance(purchaseId))
-                    .commit()
-            }
-
+            activity.onBackPressed()
         }
     }
 
@@ -127,7 +121,7 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
                     chosenUsers.add(parseFromUSerWithFlagTOUser(user))
 
             var partyId = arguments?.getString("party_id") ?: ""
-            addPurchasePresenter.addPurchase(partyId, title, price.toDouble(),chosenUsers, bitmap, bitmap2)
+            addPurchasePresenter.addPurchase(partyId, title, price.toDouble(), chosenUsers, bitmap, bitmap2)
 
             fragmentManager?.let {
                 it.beginTransaction()
@@ -137,7 +131,7 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
         }
     }
 
-    private fun parseFromUSerWithFlagTOUser(userWithFlag: UserWithFlag): User{
+    private fun parseFromUSerWithFlagTOUser(userWithFlag: UserWithFlag): User {
         return User(userWithFlag.name, userWithFlag.phoneNumber, userWithFlag.cardNumber, userWithFlag.imageUrl)
     }
 

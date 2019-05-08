@@ -1,6 +1,5 @@
 package com.example.partycheckapp.presentation.feature.partydetails.purchasedetails
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import com.example.partycheckapp.R
 import com.example.partycheckapp.data.user.User
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.user_item.view.*
-import kotlin.math.cos
 
 class PurchaseDetailsAdapter : RecyclerView.Adapter<PurchaseDetailsAdapter.PurchaseDetailsViewHolder>() {
 
@@ -33,14 +31,11 @@ class PurchaseDetailsAdapter : RecyclerView.Adapter<PurchaseDetailsAdapter.Purch
                 tv_name.text = user.name
                 tv_phone_num.text = user.phoneNumber
                 tv_money_amount.text = MONET_FORMAT.format(cost)
-                try {
-                    val uri: Uri = Uri.parse(user.imageUrl)
-                    Picasso.with(context).load(uri).into(iv_user_icon)
-                } catch (e: Exception) {
-                }
+                Picasso.with(context).load(user.imageUrl).into(iv_user_icon)
             }
         }
     }
+
     companion object {
         private const val MONET_FORMAT = "%.2f $"
     }

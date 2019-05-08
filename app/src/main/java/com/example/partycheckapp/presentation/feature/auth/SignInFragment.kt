@@ -115,7 +115,9 @@ class SignInFragment : SignInView, MvpAppCompatFragment() {
     }
 
     fun enterTheApp(){
+        val activity = (activity as LoginActivity)
         startActivity(Intent(context, MainActivity::class.java))
+        activity.finish()
     }
 
     companion object {

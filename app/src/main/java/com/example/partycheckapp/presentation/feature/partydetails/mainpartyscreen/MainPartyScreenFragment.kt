@@ -54,22 +54,24 @@ class MainPartyScreenFragment : MvpAppCompatFragment(), MainPartyScreenView {
         activity.setSupportActionBar(toolbar)
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
         activity.supportActionBar?.setDisplayShowHomeEnabled(true)
-        toolbar.setNavigationOnClickListener { startActivity(Intent(context, MainActivity::class.java)) }
+        toolbar.setNavigationOnClickListener { activity.onBackPressed() }
 
         val collapsingToolbar = collapse_toolbar as CollapsingToolbarLayout
         collapsingToolbar.title = title
         val color = context?.let { ContextCompat.getColor(it, R.color.colorWhite) }
         color?.let {
             collapsingToolbar.setExpandedTitleColor(it)
-            collapsingToolbar.setCollapsedTitleTextColor(it)}
+            collapsingToolbar.setCollapsedTitleTextColor(it)
+        }
     }
 
     private fun initClickListeners() {
-        var purchaseId = arguments?.getString("party_id")?:""
+        var purchaseId = arguments?.getString("party_id") ?: ""
         btn_add.setOnClickListener {
             fragmentManager?.let {
                 it.beginTransaction()
                     .replace(R.id.container, PurchaseListFragment.newInstance(purchaseId))
+                    .addToBackStack(null)
                     .commit()
             }
         }
@@ -77,11 +79,7 @@ class MainPartyScreenFragment : MvpAppCompatFragment(), MainPartyScreenView {
 
     override fun initView(party: Party) {
         initToolbar(party.title)
-        try {
-            val uri: Uri = Uri.parse(party.imageUrl)
-            Picasso.with(context).load(uri).into(iv_party)
-        } catch (e: Exception) {
-        }
+        Picasso.with(context).load(party.imageUrl).into(iv_party)
         tv_description.text = party.description
         tv_place.text = party.location
         val sdf = SimpleDateFormat("dd/M/yyyy")

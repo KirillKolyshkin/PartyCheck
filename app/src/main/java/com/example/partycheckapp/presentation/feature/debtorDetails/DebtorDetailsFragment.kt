@@ -51,7 +51,7 @@ class DebtorDetailsFragment : MvpAppCompatFragment(), DebtorDetailsView {
         activity.setSupportActionBar(toolbar)
         toolbar.title = "Debt Details"
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
-        toolbar.setNavigationOnClickListener { startActivity(Intent(context, MainActivity::class.java)) }
+        toolbar.setNavigationOnClickListener { activity.onBackPressed() }
     }
 
     private fun initView() {

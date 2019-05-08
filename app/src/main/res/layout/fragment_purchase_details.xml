@@ -59,7 +59,7 @@
             android:layout_marginStart="16sp"
             android:textColor="@color/colorSecondaryText"
             android:textSize="16sp"
-            android:text="Price"/>
+            android:text="@string/price"/>
 
     <TextView
             android:id="@+id/tv_price"
@@ -70,7 +70,7 @@
             android:layout_alignStart="@+id/tv_price_title"
             android:textColor="@color/colorGreenNumber"
             android:textSize="20sp"
-            android:text="100$"/>
+            tools:text="100$"/>
 
     <TextView
             android:id="@+id/tv_depositors"
@@ -81,7 +81,7 @@
             android:layout_alignStart="@+id/tv_price_title"
             android:textSize="18sp"
             android:textColor="@color/colorSecondaryText"
-            android:text="Depositors"/>
+            android:text="@string/depositors"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"

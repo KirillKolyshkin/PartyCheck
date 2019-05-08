@@ -37,7 +37,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="15"
-                        android:hint="Title"
+                        android:hint="@string/title"
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:ems="15"
                         android:inputType="number"
-                        android:hint="Price"
+                        android:hint="@string/price"
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,7 +67,7 @@
                     android:layout_alignStart="@+id/ti_price"
                     android:textSize="18sp"
                     android:textColor="@color/colorSecondaryText"
-                    android:text="Depositors"/>
+                    android:text="@string/depositors"/>
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
@@ -101,7 +101,7 @@
                     android:layout_marginTop="36dp"
                     android:layout_marginStart="12dp"
                     android:textSize="18sp"
-                    android:text="Purchase Photo"/>
+                    android:text="@string/purchase_photo"/>
 
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -124,7 +124,7 @@
                     android:layout_marginTop="36dp"
                     android:layout_marginStart="12dp"
                     android:textSize="18sp"
-                    android:text="Check Photo"/>
+                    android:text="@string/check_photo"/>
 
 
             <Button
@@ -138,7 +138,7 @@
                     android:layout_marginBottom="16dp"
                     android:textSize="14sp"
                     android:textColor="@color/colorWhite"
-                    android:text="Add"
+                    android:text="@string/add"
                     android:layout_marginEnd="8dp"/>
 
         </RelativeLayout>

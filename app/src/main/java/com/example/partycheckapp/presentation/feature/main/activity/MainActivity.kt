@@ -17,6 +17,9 @@ class MainActivity : AppCompatActivity() {
     private var menu: Menu? = null
 
     private val profileFragment = ProfileFragment.newInstance()
+    private val debtorsListFragment = DebtorsListFragment.newInstance()
+    private val searchPartyListFragment = SearchPartyListFragment.newInstance()
+    private val partyListFragment = PartyListFragment.newInstance()
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -25,7 +28,7 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.setTitle(R.string.debtors)
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, DebtorsListFragment.newInstance())
+                    .replace(R.id.container, debtorsListFragment)
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
@@ -34,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.show()
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, SearchPartyListFragment.newInstance())
+                    .replace(R.id.container, searchPartyListFragment)
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
@@ -43,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.setTitle(R.string.my_party)
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, PartyListFragment.newInstance())
+                    .replace(R.id.container, partyListFragment)
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
@@ -63,7 +66,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity_view)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation.selectedItemId = R.id.action_party_list
         setSupportActionBar(toolbar)
+        if (savedInstanceState == null) {
+            supportActionBar?.show()
+            supportActionBar?.setTitle(R.string.my_party)
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, partyListFragment)
+                .commit()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

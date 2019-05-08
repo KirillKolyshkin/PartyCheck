@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
-        <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/ti_title"
@@ -18,7 +17,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="15"
-                        android:hint="Title"
+                        android:hint="@string/title"
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -34,7 +33,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="15"
-                        android:hint="Description"
+                        android:hint="@string/description"
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="15"
-                        android:hint="Place"
+                        android:hint="@string/place"
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="15"
-                        android:hint="Password"
+                        android:hint="@string/password"
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,7 +77,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="12dp"
                     android:textSize="12sp"
-                    android:text="Event Time"/>
+                    android:text="@string/event_time"/>
 
             <DatePicker
                     android:id="@+id/dp"
@@ -114,7 +113,7 @@
                     android:layout_marginTop="46dp"
                     android:layout_marginStart="12dp"
                     android:textSize="18sp"
-                    android:text="Event Photo"/>
+                    android:text="@string/event_photo"/>
 
 
             <Button
@@ -128,9 +127,7 @@
                     android:layout_marginBottom="16dp"
                     android:textSize="14sp"
                     android:textColor="@color/colorWhite"
-                    android:text="Add"
+                    android:text="@string/add"
                     android:layout_marginEnd="8dp"/>
-
         </RelativeLayout>
-    </ScrollView>
-</RelativeLayout>
+</ScrollView>

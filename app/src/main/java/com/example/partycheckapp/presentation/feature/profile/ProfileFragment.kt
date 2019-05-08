@@ -72,11 +72,7 @@ class ProfileFragment : MvpAppCompatFragment(),
         et_phone_num.setText(user?.phoneNumber)
         tv_user_name.text = user?.name
         et_card_num.setText(user?.cardNumber.toString())
-        try {
-            val uri: Uri = Uri.parse(user?.imageUrl)
-            Picasso.with(context).load(uri).into(iv_photo)
-        } catch (e: Exception) {
-        }
+        Picasso.with(context).load(user?.imageUrl).into(iv_photo)
     }
 
     private fun changeFocusable() {
@@ -111,7 +107,8 @@ class ProfileFragment : MvpAppCompatFragment(),
 
     fun takePhoto() {
         val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(cameraIntent,
+        startActivityForResult(
+            cameraIntent,
             TAKE_PICTURE
         )
     }
@@ -120,7 +117,8 @@ class ProfileFragment : MvpAppCompatFragment(),
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "image/*"
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"),
+        startActivityForResult(
+            Intent.createChooser(intent, "Select Picture"),
             REQUEST_GET_SINGLE_FILE
         )
     }

@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">PartyCheckApp</string>
-    <string name="debtors">debtors</string>
-    <string name="search">search</string>
-    <string name="my_party">my party</string>
-    <string name="profile">profile</string>
+    <string name="debtors">Debtors</string>
+    <string name="search">Search</string>
+    <string name="my_party">My party</string>
+    <string name="profile">Profile</string>
     <string name="title_activity_bottom_nav">BottomNavActivity</string>
     <string name="title_home">home</string>
     <string name="search_hint">input some data</string>
@@ -37,4 +37,17 @@
     <string name="debt_repaid">Debt Repaid</string>
     <string name="debt_approve">Wait approve from second side</string>
     <string name="cancel">Cancel</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="place">Place</string>
+    <string name="event_time">Event Time</string>
+    <string name="event_photo">Event Photo</string>
+    <string name="add">Add</string>
+    <string name="price">Price</string>
+    <string name="depositors">Depositors</string>
+    <string name="purchase_photo">Purchase Photo</string>
+    <string name="check_photo">Check Photo</string>
+    <string name="date">Date</string>
+    <string name="phone_def">+X-XXX-XXX-XX-XX</string>
+    <string name="card_def">XXXX-XXXX-XXXX-XXXX</string>
 </resources>

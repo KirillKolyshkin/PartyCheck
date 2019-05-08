@@ -39,11 +39,7 @@ class AddPurchaseAdapter : RecyclerView.Adapter<AddPurchaseAdapter.AddPurchaseVi
             with(itemView) {
                 tv_name.text = user.name
                 tv_phone_num.text = user.phoneNumber
-                try {
-                    val uri: Uri = Uri.parse(user.imageUrl)
-                    Picasso.with(context).load(uri).into(iv_user_icon)
-                } catch (e: Exception) {
-                }
+                    Picasso.with(context).load(user.imageUrl).into(iv_user_icon)
             }
         }
 

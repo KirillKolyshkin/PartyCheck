@@ -59,10 +59,7 @@ class PurchaseDetailsFragment : MvpAppCompatFragment(), PurchaseDetailsView {
         toolbar.title = "Purchase Details"
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
         toolbar.setNavigationOnClickListener {
-            val partyId = arguments?.getString("party_id") ?: ""
-            fragmentManager?.beginTransaction()?.replace(R.id.container, PurchaseListFragment.newInstance(partyId))
-                ?.commit()
-
+            activity.onBackPressed()
         }
     }
 

@@ -68,13 +68,7 @@ class PurchaseListFragment : MvpAppCompatFragment(),
         toolbar.title = "Purchase List"
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
         toolbar.setNavigationOnClickListener {
-            var purchaseId = arguments?.getString("party_id") ?: ""
-            fragmentManager?.let {
-                it.beginTransaction()
-                    .replace(R.id.container, MainPartyScreenFragment.newInstance(purchaseId))
-                    .commit()
-            }
-
+            activity.onBackPressed()
         }
     }
 
@@ -84,16 +78,18 @@ class PurchaseListFragment : MvpAppCompatFragment(),
             fragmentManager?.let {
                 it.beginTransaction()
                     .replace(R.id.container, AddPurchaseFragment.newInstance(purchaseId))
+                    .addToBackStack(null)
                     .commit()
             }
         }
     }
 
     private fun onItemClick(purchase: Purchase) {
-        arguments?.getString("party_id")?.let {partyId ->
+        arguments?.getString("party_id")?.let { partyId ->
             fragmentManager?.let {
                 it.beginTransaction()
                     .replace(R.id.container, PurchaseDetailsFragment.newInstance(partyId, purchase.title))
+                    .addToBackStack(null)
                     .commit()
             }
         }

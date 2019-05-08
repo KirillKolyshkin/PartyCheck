@@ -18,7 +18,7 @@ class AddPartyActivity : AppCompatActivity() {
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
         supportActionBar?.setTitle(R.string.add_party)
 
-        toolbar.setNavigationOnClickListener { startActivity(Intent(applicationContext, MainActivity::class.java)) }
+        toolbar.setNavigationOnClickListener { onBackPressed() }
 
         if (savedInstanceState == null) {
             supportFragmentManager

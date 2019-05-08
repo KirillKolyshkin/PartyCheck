@@ -3,22 +3,35 @@ package com.example.partycheckapp.presentation.feature.search.party
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.example.partycheckapp.domain.bd.DBProvider
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
 class SearchPartyListPresenter(private val dbProvider: DBProvider) : MvpPresenter<SearchPartyListView>() {
+    protected val compositeDisposable = CompositeDisposable()
 
-    fun setPartySearchList() = dbProvider.getAllParties().subscribeBy(
-        onSuccess = {
-            viewState.showPartyList(it)
-        }
-    )
+    fun setPartySearchList() {
+        val disposable = dbProvider.getAllParties().subscribeBy(
+            onSuccess = {
+                viewState.showPartyList(it)
+            }
+        )
+        compositeDisposable.add(disposable)
+    }
 
-    fun getUserPartyList() = dbProvider.getUserParties().subscribeBy(
-        onSuccess = {
-            viewState.getUserPartyList(it)
-        }
-    )
+    fun getUserPartyList() {
+        val disposable = dbProvider.getUserParties().subscribeBy(
+            onSuccess = {
+                viewState.getUserPartyList(it)
+            }
+        )
+        compositeDisposable.add(disposable)
+    }
 
     fun addUserToParty(partyId: String) = dbProvider.addUserToParty(partyId)
+
+    override fun destroyView(view: SearchPartyListView?) {
+        super.destroyView(view)
+        compositeDisposable.clear()
+    }
 }

@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Description"
+                    android:text="@string/description"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp"/>
 
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_description"
                     android:layout_marginTop="16dp"
-                    android:text="Date"
+                    android:text="@string/date"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp"/>
 
@@ -112,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_date"
                     android:layout_marginTop="16dp"
-                    android:text="Place"
+                    android:text="@string/place"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="16sp"/>
 
