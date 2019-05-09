@@ -49,22 +49,16 @@ class AddPartyFragment: MvpAppCompatFragment(), AddPartyView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar()
         initClickListeners()
         initTextListeners()
     }
     override fun showDialog() {
         var ad = context?.let { AlertDialog.Builder(it) }
         ad?.setTitle("Choose Type")  // заголовок
-        ad?.setPositiveButton("Camera", object : DialogInterface.OnClickListener {
-            override fun onClick(dialog: DialogInterface, arg1: Int) {
-                takePhoto()
-            }
-        })
-        ad?.setNegativeButton("Gallery", object : DialogInterface.OnClickListener {
-            override fun onClick(dialog: DialogInterface, arg1: Int) {
-                chooseFromDevise()
-            }
-        })
+        ad?.setPositiveButton("Camera") { _, _ -> takePhoto() }
+        ad?.setNegativeButton("Gallery"
+        ) { _, _ -> chooseFromDevise() }
         ad?.show()
     }
 
@@ -145,6 +139,16 @@ class AddPartyFragment: MvpAppCompatFragment(), AddPartyView {
             addPartyPresenter.addParty(title, description, place, date, password, bitmap)
 
             startActivity(Intent(context, MainActivity::class.java))
+        }
+    }
+
+    private fun initToolbar() {
+        val activity = (activity as AddPartyActivity)
+        activity.setSupportActionBar(toolbar)
+        toolbar.title = "Add Party"
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
+        toolbar.setNavigationOnClickListener {
+            activity.onBackPressed()
         }
     }
 

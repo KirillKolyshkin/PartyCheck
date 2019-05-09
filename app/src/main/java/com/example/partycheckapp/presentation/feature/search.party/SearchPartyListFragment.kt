@@ -1,9 +1,6 @@
 package com.example.partycheckapp.presentation.feature.search.party
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -17,10 +14,12 @@ import kotlinx.android.synthetic.main.fragment_party_list.*
 import javax.inject.Inject
 import android.content.DialogInterface
 import android.content.Intent
+import android.view.*
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
+import com.example.partycheckapp.presentation.feature.main.activity.MainActivity
 import com.example.partycheckapp.presentation.feature.partydetails.PartyDetailsActivity
-
 
 class SearchPartyListFragment : MvpAppCompatFragment(),
     SearchPartyListView,
@@ -44,8 +43,10 @@ class SearchPartyListFragment : MvpAppCompatFragment(),
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_party_list, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
+        return inflater.inflate(R.layout.fragment_party_list, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,6 +62,40 @@ class SearchPartyListFragment : MvpAppCompatFragment(),
         searchPartyListPresenter.setPartySearchList()
         swipe_container.setColorSchemeResources(R.color.colorAccent)
         swipe_container.setOnRefreshListener(this)
+        initToolbar()
+    }
+
+    private fun initToolbar() {
+        val activity = (activity as MainActivity)
+        activity.setSupportActionBar(toolbar)
+        toolbar.title = "Search Party"
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        val activity = (activity as MainActivity)
+        activity.menuInflater.inflate(R.menu.toolbar_items, menu)
+        val mSearch = menu?.findItem(R.id.action_search)
+        val mSearchView = mSearch?.actionView as SearchView
+        mSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                getFilterList(newText)
+                return false
+            }
+        })
+        localMenu = menu
+    }
+
+    fun getFilterList(textQuery: String){
+        val newList = ArrayList<Party>()
+        for (party in dataList){
+            if(party.title.contains(textQuery))
+                newList.add(party)
+        }
+        showPartyList(newList)
     }
 
     override fun onRefresh() {
@@ -120,6 +155,7 @@ class SearchPartyListFragment : MvpAppCompatFragment(),
     }
 
     companion object {
+        var localMenu: Menu? = null
         var dataList = ArrayList<Party>()
         fun newInstance(): SearchPartyListFragment =
             SearchPartyListFragment()

@@ -8,22 +8,6 @@
         android:layout_height="match_parent"
         tools:context=".presentation.feature.main.activity.MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
-            android:layout_width="match_parent"
-            android:background="@color/colorPrimary"
-            android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"
-            android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                app:titleTextColor="@color/colorWhite"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize">
-
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
-
     <FrameLayout
             android:layout_below="@id/appbar"
             android:id="@+id/container"

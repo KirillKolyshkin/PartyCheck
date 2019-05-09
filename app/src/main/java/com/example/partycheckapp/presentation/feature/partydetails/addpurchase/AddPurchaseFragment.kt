@@ -12,6 +12,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -113,20 +114,21 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
             } catch (e: Exception) {
                 bitmap2 = null
             }
+            if (bitmap != null && bitmap2 != null) {
+                val users = addPurchaseAdapter.list
+                val chosenUsers = ArrayList<User>()
+                for (user in users)
+                    if (user.flag)
+                        chosenUsers.add(parseFromUSerWithFlagTOUser(user))
 
-            var users = addPurchaseAdapter.list
-            var chosenUsers = ArrayList<User>()
-            for (user in users)
-                if (user.flag)
-                    chosenUsers.add(parseFromUSerWithFlagTOUser(user))
+                val partyId = arguments?.getString("party_id") ?: ""
+                addPurchasePresenter.addPurchase(partyId, title, price.toDouble(), chosenUsers, bitmap, bitmap2)
 
-            var partyId = arguments?.getString("party_id") ?: ""
-            addPurchasePresenter.addPurchase(partyId, title, price.toDouble(), chosenUsers, bitmap, bitmap2)
-
-            fragmentManager?.let {
-                it.beginTransaction()
-                    .replace(R.id.container, PurchaseListFragment.newInstance(partyId))
-                    .commit()
+                fragmentManager?.beginTransaction()?.replace(R.id.container, PurchaseListFragment.newInstance(partyId))
+                    ?.commit()
+            }
+            else{
+                Toast.makeText(context, "Please, add photos", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -140,8 +142,8 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
     }
 
     override fun getParty(party: Party) {
-        var users = party.users
-        var usersWithFlag = ArrayList<UserWithFlag>()
+        val users = party.users
+        val usersWithFlag = ArrayList<UserWithFlag>()
         for (user in users)
             usersWithFlag.add(parseFromUserToUserWithFlag(user))
         addPurchaseAdapter.list = usersWithFlag
@@ -149,7 +151,7 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
     }
 
     override fun showDialog(isIcon: Boolean) {
-        var ad = context?.let { AlertDialog.Builder(it) }
+        val ad = context?.let { AlertDialog.Builder(it) }
         ad?.setTitle("Choose Type")  // заголовок
         ad?.setPositiveButton("Camera") { _, _ -> takePhoto(isIcon) }
         ad?.setNegativeButton("Gallery") { _, _ -> chooseFromDevise(isIcon) }
@@ -239,14 +241,14 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
         }
     }
 
-    fun getPathFromURI(contentUri: Uri): String? {
+    private fun getPathFromURI(contentUri: Uri): String? {
         var res: String? = null
         val proj = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = context?.let { it.contentResolver.query(contentUri, proj, null, null, null) }
+        val cursor = context?.contentResolver?.query(contentUri, proj, null, null, null)
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-                res = cursor.getString(column_index)
+                val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                res = cursor.getString(columnIndex)
             }
         }
         cursor?.close()

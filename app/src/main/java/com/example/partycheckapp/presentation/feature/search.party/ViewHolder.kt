@@ -1,6 +1,5 @@
 package com.example.partycheckapp.presentation.feature.search.party
 
-import android.net.Uri
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.partycheckapp.data.party.Party

@@ -11,7 +11,6 @@ import com.example.partycheckapp.presentation.feature.party.partylist.PartyListF
 import com.example.partycheckapp.presentation.feature.search.party.SearchPartyListFragment
 import kotlinx.android.synthetic.main.main_activity_view.*
 
-
 class MainActivity : AppCompatActivity() {
 
     private var menu: Menu? = null
@@ -24,8 +23,6 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.action_debtors -> {
-                supportActionBar?.show()
-                supportActionBar?.setTitle(R.string.debtors)
                 supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container, debtorsListFragment)
@@ -33,8 +30,6 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_search -> {
-                supportActionBar?.setTitle(R.string.search)
-                supportActionBar?.show()
                 supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container, searchPartyListFragment)
@@ -42,8 +37,6 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_party_list -> {
-                supportActionBar?.show()
-                supportActionBar?.setTitle(R.string.my_party)
                 supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container, partyListFragment)
@@ -51,7 +44,6 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.action_profile -> {
-                supportActionBar?.hide()
                 supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container, profileFragment)
@@ -67,21 +59,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity_view)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         navigation.selectedItemId = R.id.action_party_list
-        setSupportActionBar(toolbar)
         if (savedInstanceState == null) {
-            supportActionBar?.show()
-            supportActionBar?.setTitle(R.string.my_party)
             supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, partyListFragment)
                 .commit()
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_items, menu)
-        this.menu = menu
-        return true
     }
 
 }

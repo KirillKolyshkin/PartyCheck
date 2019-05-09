@@ -2,9 +2,8 @@ package com.example.partycheckapp.presentation.feature.party.partylist
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -14,6 +13,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.partycheckapp.PartyApp
 import com.example.partycheckapp.R
 import com.example.partycheckapp.data.party.Party
+import com.example.partycheckapp.presentation.feature.main.activity.MainActivity
 import com.example.partycheckapp.presentation.feature.party.addparty.AddPartyActivity
 import com.example.partycheckapp.presentation.feature.partydetails.PartyDetailsActivity
 import kotlinx.android.synthetic.main.fragmet_my_party_list.*
@@ -41,8 +41,10 @@ class PartyListFragment : MvpAppCompatFragment(),
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragmet_my_party_list, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
+        return inflater.inflate(R.layout.fragmet_my_party_list, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,6 +60,41 @@ class PartyListFragment : MvpAppCompatFragment(),
         initClickListeners()
         swipe_container.setColorSchemeResources(R.color.colorAccent)
         swipe_container.setOnRefreshListener(this)
+        initToolbar()
+    }
+
+    private fun initToolbar() {
+        val activity = (activity as MainActivity)
+        activity.setSupportActionBar(toolbar)
+        toolbar.title = "My Parties"
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        val activity = (activity as MainActivity)
+        activity.menuInflater.inflate(R.menu.toolbar_items, menu)
+        val mSearch = menu?.findItem(R.id.action_search)
+        val mSearchView = mSearch?.actionView as SearchView
+        mSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                getFilterList(newText)
+                return false
+            }
+        })
+        localMenu = menu
+    }
+
+    fun getFilterList(textQuery: String){
+        val newList = ArrayList<Party>()
+        for (party in localParties){
+            if(party.title.contains(textQuery))
+                newList.add(party)
+        }
+        partyListAdapter.list = newList
+        partyListAdapter.notifyDataSetChanged()
     }
 
     private fun initClickListeners() {
@@ -81,12 +118,15 @@ class PartyListFragment : MvpAppCompatFragment(),
     }
 
     override fun showPartyList(dataList: ArrayList<Party>) {
+        localParties = dataList
         partyListAdapter.list = dataList
         partyListAdapter.notifyDataSetChanged()
         swipe_container.isRefreshing = false
     }
 
     companion object {
+        var localMenu: Menu? = null
+        var localParties = ArrayList<Party>()
         fun newInstance(): PartyListFragment =
             PartyListFragment()
     }

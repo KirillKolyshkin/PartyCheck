@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.partycheckapp.R
 import com.example.partycheckapp.presentation.feature.partydetails.mainpartyscreen.MainPartyScreenFragment
 
-
-
 class PartyDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

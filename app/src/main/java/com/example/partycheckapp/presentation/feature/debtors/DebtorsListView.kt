@@ -8,6 +8,6 @@ import com.example.partycheckapp.data.user.User
 
 @StateStrategyType(value = AddToEndSingleStrategy::class)
 interface DebtorsListView : MvpView {
-    fun showDebtorsList(dataList: ArrayList<Debt>)
+    fun getDebtorsList(dataList: ArrayList<Debt>)
     fun getUser(user: User)
 }

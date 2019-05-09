@@ -1,9 +1,10 @@
 package com.example.partycheckapp.presentation.feature.partydetails.purchaselist
 
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -15,10 +16,13 @@ import com.example.partycheckapp.R
 import com.example.partycheckapp.data.party.Purchase
 import com.example.partycheckapp.presentation.feature.partydetails.PartyDetailsActivity
 import com.example.partycheckapp.presentation.feature.partydetails.addpurchase.AddPurchaseFragment
-import com.example.partycheckapp.presentation.feature.partydetails.mainpartyscreen.MainPartyScreenFragment
 import com.example.partycheckapp.presentation.feature.partydetails.purchasedetails.PurchaseDetailsFragment
 import kotlinx.android.synthetic.main.fragment_purchase_list.*
 import javax.inject.Inject
+
+
+
+
 
 class PurchaseListFragment : MvpAppCompatFragment(),
     PurchaseListView,
@@ -42,11 +46,14 @@ class PurchaseListFragment : MvpAppCompatFragment(),
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_purchase_list, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
+        return inflater.inflate(R.layout.fragment_purchase_list, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initToolbar()
         recycler_view.addItemDecoration(
             DividerItemDecoration(
                 this.context, resources.configuration.orientation
@@ -59,7 +66,6 @@ class PurchaseListFragment : MvpAppCompatFragment(),
         initClickListeners()
         swipe_container.setColorSchemeResources(R.color.colorAccent)
         swipe_container.setOnRefreshListener(this)
-        initToolbar()
     }
 
     private fun initToolbar() {
@@ -70,6 +76,34 @@ class PurchaseListFragment : MvpAppCompatFragment(),
         toolbar.setNavigationOnClickListener {
             activity.onBackPressed()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        val activity = (activity as PartyDetailsActivity)
+        activity.menuInflater.inflate(R.menu.toolbar_items, menu)
+        val mSearch = menu?.findItem(R.id.action_search)
+        val mSearchView = mSearch?.actionView as SearchView
+        mSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                getFilterList(newText)
+                return false
+            }
+        })
+        localMenu = menu
+    }
+
+    fun getFilterList(textQuery: String){
+        val newList = ArrayList<Purchase>()
+        for (purchase in localPurchase){
+            if(purchase.title.contains(textQuery))
+                newList.add(purchase)
+        }
+        purchaseListAdapter.list = newList
+        purchaseListAdapter.notifyDataSetChanged()
     }
 
     private fun initClickListeners() {
@@ -100,12 +134,15 @@ class PurchaseListFragment : MvpAppCompatFragment(),
     }
 
     override fun showPurchaseList(dataList: ArrayList<Purchase>) {
+        localPurchase = dataList
         purchaseListAdapter.list = dataList
         purchaseListAdapter.notifyDataSetChanged()
         swipe_container.isRefreshing = false
     }
 
     companion object {
+        var localMenu: Menu? = null
+        var localPurchase = ArrayList<Purchase>()
         fun newInstance(partyId: String): PurchaseListFragment {
             val args = Bundle()
             args.putString("party_id", partyId)

@@ -14,7 +14,7 @@ class DebtorsListPresenter(private val dbProvider: DBProvider) : MvpPresenter<De
     fun setUsersDebtorsList() {
         val disposable = dbProvider.getUserDebtors().subscribeBy(
             onSuccess = {
-                viewState.showDebtorsList(it)
+                viewState.getDebtorsList(it)
             }
         )
         compositeDisposable.add(disposable)

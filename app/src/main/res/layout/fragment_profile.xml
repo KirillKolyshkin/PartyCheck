@@ -58,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:ems="18"
                 android:layout_below="@id/tv_phone_num"
+                android:inputType="phone"
                 android:hint="@string/phone_def"
                 style="@style/EditTextProfile"/>
 
@@ -76,6 +77,7 @@
                 android:layout_height="wrap_content"
                 android:ems="18"
                 android:layout_below="@id/tv_card_num"
+                android:inputType="number"
                 android:hint="@string/card_def"
                 style="@style/EditTextProfile"/>
     </RelativeLayout>
