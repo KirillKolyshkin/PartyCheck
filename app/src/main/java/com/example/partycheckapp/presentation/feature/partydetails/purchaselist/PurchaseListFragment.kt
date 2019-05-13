@@ -59,9 +59,8 @@ class PurchaseListFragment : MvpAppCompatFragment(),
                 this.context, resources.configuration.orientation
             )
         )
-        val manager = LinearLayoutManager(context)
         recycler_view.adapter = purchaseListAdapter
-        recycler_view.layoutManager = manager
+        recycler_view.layoutManager = LinearLayoutManager(context)
         arguments?.getString("party_id")?.let { purchaseListPresenter.showPurchase(it) }
         initClickListeners()
         swipe_container.setColorSchemeResources(R.color.colorAccent)
@@ -71,7 +70,7 @@ class PurchaseListFragment : MvpAppCompatFragment(),
     private fun initToolbar() {
         val activity = (activity as PartyDetailsActivity)
         activity.setSupportActionBar(toolbar)
-        toolbar.title = "Purchase List"
+        toolbar.title = getString(R.string.purchase_list)
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
         toolbar.setNavigationOnClickListener {
             activity.onBackPressed()
@@ -97,12 +96,7 @@ class PurchaseListFragment : MvpAppCompatFragment(),
     }
 
     fun getFilterList(textQuery: String){
-        val newList = ArrayList<Purchase>()
-        for (purchase in localPurchase){
-            if(purchase.title.contains(textQuery))
-                newList.add(purchase)
-        }
-        purchaseListAdapter.list = newList
+        purchaseListAdapter.list = ArrayList(localPurchase.filter { it.title.contains(textQuery) })
         purchaseListAdapter.notifyDataSetChanged()
     }
 

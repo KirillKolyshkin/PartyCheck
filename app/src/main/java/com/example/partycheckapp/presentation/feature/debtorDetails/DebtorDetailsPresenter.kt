@@ -8,21 +8,12 @@ import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
 class DebtorDetailsPresenter(private val dbProvider: DBProvider) : MvpPresenter<DebtorDetailsView>() {
-    protected val compositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable()
 
     fun getDebt(debtRef: String) {
         val disposable = dbProvider.getDebt(debtRef).subscribeBy(
             onSuccess = {
-                viewState.getDebt(it)
-            }
-        )
-        compositeDisposable.add(disposable)
-    }
-
-    fun getUser() {
-        val disposable = dbProvider.getCurrentUser().subscribeBy(
-            onSuccess = {
-                viewState.getUser(it)
+                viewState.receiveDebt(it)
             }
         )
         compositeDisposable.add(disposable)

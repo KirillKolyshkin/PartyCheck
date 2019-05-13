@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -60,9 +59,8 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
                 this.context, resources.configuration.orientation
             )
         )
-        val manager = LinearLayoutManager(context)
         recycler_view.adapter = addPurchaseAdapter
-        recycler_view.layoutManager = manager
+        recycler_view.layoutManager = LinearLayoutManager(context)
         initClickListeners()
         initToolbar()
         initTextListeners()
@@ -74,7 +72,7 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
     private fun initToolbar() {
         val activity = (activity as PartyDetailsActivity)
         activity.setSupportActionBar(toolbar)
-        toolbar.title = "Add Purchase"
+        toolbar.title = getString(R.string.add_purchase)
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
         toolbar.setNavigationOnClickListener {
             activity.onBackPressed()
@@ -89,14 +87,14 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
             showDialog(false)
         }
         btn_accept.setOnClickListener {
-            val title = et_title.text.toString().trim { it <= ' ' }
-            val price = et_price.text.toString().trim { it <= ' ' }
+            val title = et_title.text.toString()
+            val price = et_price.text.toString()
 
-            if (TextUtils.isEmpty(title)) {
+            if (title.isEmpty()) {
                 ti_title.error = getString(R.string.error_title)
                 return@setOnClickListener
             }
-            if (TextUtils.isEmpty(price)) {
+            if (price.isEmpty()) {
                 ti_price.error = getString(R.string.error_price)
                 return@setOnClickListener
             }
@@ -126,8 +124,7 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
 
                 fragmentManager?.beginTransaction()?.replace(R.id.container, PurchaseListFragment.newInstance(partyId))
                     ?.commit()
-            }
-            else{
+            } else {
                 Toast.makeText(context, "Please, add photos", Toast.LENGTH_SHORT).show()
             }
         }
@@ -152,7 +149,7 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
 
     override fun showDialog(isIcon: Boolean) {
         val ad = context?.let { AlertDialog.Builder(it) }
-        ad?.setTitle("Choose Type")  // заголовок
+        ad?.setTitle(getString(R.string.choose_type))
         ad?.setPositiveButton("Camera") { _, _ -> takePhoto(isIcon) }
         ad?.setNegativeButton("Gallery") { _, _ -> chooseFromDevise(isIcon) }
         ad?.show()
@@ -161,9 +158,9 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
     private fun takePhoto(isIcon: Boolean) {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (isIcon)
-            startActivityForResult(cameraIntent, TAKE_PICTURE)
+            startActivityForResult(cameraIntent, 100)
         else
-            startActivityForResult(cameraIntent, TAKE_PICTURE_CHECK)
+            startActivityForResult(cameraIntent, 101)
     }
 
     private fun chooseFromDevise(isIcon: Boolean) {
@@ -171,9 +168,15 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "image/*"
         if (isIcon)
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GET_SINGLE_FILE)
+            startActivityForResult(
+                Intent.createChooser(intent, getString(R.string.select_picture)),
+                200
+            )
         else
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GET_SINGLE_FILE_CHECK)
+            startActivityForResult(
+                Intent.createChooser(intent, getString(R.string.select_picture)),
+                201
+            )
     }
 
     private fun initTextListeners() {
@@ -206,7 +209,6 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
                         data?.extras?.get("data") as Bitmap
                     iv_photo.setImageBitmap(selectedImage)
                 }
-                //val bitmap = (iv_photo.drawable as BitmapDrawable).bitmap
             }
             101 -> {
                 if (resultCode == AppCompatActivity.RESULT_OK) {
@@ -214,7 +216,6 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
                         data?.extras?.get("data") as Bitmap
                     iv_check.setImageBitmap(selectedImage)
                 }
-                //val bitmap = (iv_photo.drawable as BitmapDrawable).bitmap
             }
             200 -> {
                 if (resultCode == AppCompatActivity.RESULT_OK) {
@@ -256,10 +257,6 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
     }
 
     companion object {
-        const val TAKE_PICTURE = 100
-        const val REQUEST_GET_SINGLE_FILE = 200
-        const val TAKE_PICTURE_CHECK = 101
-        const val REQUEST_GET_SINGLE_FILE_CHECK = 201
         fun newInstance(partyId: String): AddPurchaseFragment {
             val args = Bundle()
             args.putString("party_id", partyId)

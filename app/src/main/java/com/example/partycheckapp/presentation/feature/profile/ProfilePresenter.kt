@@ -9,7 +9,7 @@ import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
 class ProfilePresenter(private val dbProvider: DBProvider) : MvpPresenter<ProfileView>() {
-    protected val compositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable()
 
     fun getUser() {
         val disposable = dbProvider.getCurrentUser()

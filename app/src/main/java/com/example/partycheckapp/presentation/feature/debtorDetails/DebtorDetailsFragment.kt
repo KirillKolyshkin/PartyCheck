@@ -26,6 +26,9 @@ class DebtorDetailsFragment : MvpAppCompatFragment(), DebtorDetailsView {
     @ProvidePresenter
     fun initPresenter() = debtorDetailsPresenter
 
+    private var localDebt = Debt()
+    private var secondUser = User()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         PartyApp.instance
             .getAppComponent()
@@ -42,14 +45,13 @@ class DebtorDetailsFragment : MvpAppCompatFragment(), DebtorDetailsView {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
         initClickListener()
-        initPresenter().getUser()
         arguments?.getString("debt_ref")?.let { initPresenter().getDebt(it) }
     }
 
     private fun initToolbar() {
         val activity = (activity as DebtorDetailsActivity)
         activity.setSupportActionBar(toolbar)
-        toolbar.title = "Debt Details"
+        toolbar.title = getString(R.string.debt_details)
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
         toolbar.setNavigationOnClickListener { activity.onBackPressed() }
     }
@@ -93,17 +95,13 @@ class DebtorDetailsFragment : MvpAppCompatFragment(), DebtorDetailsView {
         }
     }
 
-    override fun getDebt(debt: Debt) {
+    override fun receiveDebt(debt: Debt) {
         localDebt = debt
         secondUser = if (debt.debtSize > 0)
             debt.debtor
         else
             debt.creditor
         initView()
-    }
-
-    override fun getUser(user: User) {
-        localUser = user
     }
 
     private fun initClickListener() {
@@ -122,9 +120,6 @@ class DebtorDetailsFragment : MvpAppCompatFragment(), DebtorDetailsView {
 
     companion object {
         private const val MONET_FORMAT = "%.2f $"
-        var localUser = User()
-        var localDebt = Debt()
-        var secondUser = User()
         fun newInstance(debtRef: String): DebtorDetailsFragment {
             val args = Bundle()
             args.putString("debt_ref", debtRef)

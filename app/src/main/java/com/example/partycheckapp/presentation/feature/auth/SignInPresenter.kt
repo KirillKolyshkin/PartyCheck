@@ -10,7 +10,7 @@ import io.reactivex.rxkotlin.subscribeBy
 @InjectViewState
 class SignInPresenter(private val interactor: UserInteractor, private val provider: DBProvider) :
     MvpPresenter<SignInView>() {
-    protected val compositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable()
 
     fun sentCode(phone: String) {
         val disposable = interactor.sentCode(phone)

@@ -1,6 +1,5 @@
 package com.example.partycheckapp.presentation.feature.party.addparty
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -8,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +24,7 @@ import java.io.File
 import java.util.*
 import javax.inject.Inject
 
-class AddPartyFragment: MvpAppCompatFragment(), AddPartyView {
+class AddPartyFragment : MvpAppCompatFragment(), AddPartyView {
 
     @Inject
     @InjectPresenter
@@ -53,11 +51,13 @@ class AddPartyFragment: MvpAppCompatFragment(), AddPartyView {
         initClickListeners()
         initTextListeners()
     }
+
     override fun showDialog() {
         var ad = context?.let { AlertDialog.Builder(it) }
-        ad?.setTitle("Choose Type")  // заголовок
+        ad?.setTitle(getString(R.string.choose_type))
         ad?.setPositiveButton("Camera") { _, _ -> takePhoto() }
-        ad?.setNegativeButton("Gallery"
+        ad?.setNegativeButton(
+            "Gallery"
         ) { _, _ -> chooseFromDevise() }
         ad?.show()
     }
@@ -71,7 +71,10 @@ class AddPartyFragment: MvpAppCompatFragment(), AddPartyView {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "image/*"
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GET_SINGLE_FILE)
+        startActivityForResult(
+            Intent.createChooser(intent, getString(R.string.select_picture)),
+            REQUEST_GET_SINGLE_FILE
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -83,7 +86,6 @@ class AddPartyFragment: MvpAppCompatFragment(), AddPartyView {
                         data?.extras?.get("data") as Bitmap
                     iv_photo.setImageBitmap(selectedImage)
                 }
-                //val bitmap = (iv_photo.drawable as BitmapDrawable).bitmap
             }
             200 -> {
                 if (resultCode == AppCompatActivity.RESULT_OK) {
@@ -104,27 +106,27 @@ class AddPartyFragment: MvpAppCompatFragment(), AddPartyView {
             showDialog()
         }
         btn_accept.setOnClickListener {
-            val title = et_title.text.toString().trim { it <= ' ' }
-            val description = et_description.text.toString().trim { it <= ' ' }
-            val place = et_place.text.toString().trim { it <= ' ' }
-            val password = et_password.text.toString().trim { it <= ' ' }
+            val title = et_title.text.toString()
+            val description = et_description.text.toString()
+            val place = et_place.text.toString()
+            val password = et_password.text.toString()
 
             val calendar = GregorianCalendar(dp.year, dp.month, dp.dayOfMonth)
             val date = calendar.time
 
-            if (TextUtils.isEmpty(title)) {
+            if (title.isEmpty()) {
                 ti_title.error = getString(R.string.error_title)
                 return@setOnClickListener
             }
-            if (TextUtils.isEmpty(description)) {
+            if (description.isEmpty()) {
                 ti_description.error = getString(R.string.error_description)
                 return@setOnClickListener
             }
-            if (TextUtils.isEmpty(place)) {
+            if (place.isEmpty()) {
                 ti_place.error = getString(R.string.error_place)
                 return@setOnClickListener
             }
-            if (TextUtils.isEmpty(password)) {
+            if (password.isEmpty()) {
                 ti_password.error = getString(R.string.error_pass)
                 return@setOnClickListener
             }
@@ -145,7 +147,7 @@ class AddPartyFragment: MvpAppCompatFragment(), AddPartyView {
     private fun initToolbar() {
         val activity = (activity as AddPartyActivity)
         activity.setSupportActionBar(toolbar)
-        toolbar.title = "Add Party"
+        toolbar.title = getString(R.string.add_party)
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
         toolbar.setNavigationOnClickListener {
             activity.onBackPressed()

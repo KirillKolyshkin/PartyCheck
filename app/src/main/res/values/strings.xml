@@ -2,7 +2,7 @@
     <string name="app_name">PartyCheckApp</string>
     <string name="debtors">Debtors</string>
     <string name="search">Search</string>
-    <string name="my_party">My party</string>
+    <string name="my_party">My parties</string>
     <string name="profile">Profile</string>
     <string name="title_activity_bottom_nav">BottomNavActivity</string>
     <string name="title_home">home</string>
@@ -50,4 +50,13 @@
     <string name="date">Date</string>
     <string name="phone_def">+X-XXX-XXX-XX-XX</string>
     <string name="card_def">XXXX-XXXX-XXXX-XXXX</string>
+    <string name="debt_details">Debt Details</string>
+    <string name="debtor_list">Debtor List</string>
+    <string name="add_party">Add Party</string>
+    <string name="add_purchase">Add Purchase</string>
+    <string name="purchase_details">Purchase Details</string>
+    <string name="purchase_list">Purchase List</string>
+    <string name="search_party">Search Party</string>
+    <string name="choose_type">Choose Type</string>
+    <string name="select_picture">Select Picture</string>
 </resources>

@@ -66,14 +66,10 @@ class MainPartyScreenFragment : MvpAppCompatFragment(), MainPartyScreenView {
     }
 
     private fun initClickListeners() {
-        var purchaseId = arguments?.getString("party_id") ?: ""
+        val purchaseId = arguments?.getString("party_id") ?: ""
         btn_add.setOnClickListener {
-            fragmentManager?.let {
-                it.beginTransaction()
-                    .replace(R.id.container, PurchaseListFragment.newInstance(purchaseId))
-                    .addToBackStack(null)
-                    .commit()
-            }
+            fragmentManager?.beginTransaction()?.replace(R.id.container, PurchaseListFragment.newInstance(purchaseId))
+                ?.addToBackStack(null)?.commit()
         }
     }
 

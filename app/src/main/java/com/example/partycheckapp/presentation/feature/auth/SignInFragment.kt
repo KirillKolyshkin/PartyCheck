@@ -3,7 +3,6 @@ package com.example.partycheckapp.presentation.feature.auth
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.partycheckapp.PartyApp
 import com.example.partycheckapp.R
 import com.example.partycheckapp.presentation.feature.main.activity.MainActivity
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import javax.inject.Inject
 
@@ -26,8 +24,6 @@ class SignInFragment : SignInView, MvpAppCompatFragment() {
 
     @ProvidePresenter
     fun initPresenter() = signInPresenter
-
-    private var auth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         PartyApp
@@ -45,22 +41,15 @@ class SignInFragment : SignInView, MvpAppCompatFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkUser()
-        auth = FirebaseAuth.getInstance()
-
         initClickListeners()
         initTextListeners()
     }
 
-
     private fun initTextListeners() {
         et_phone.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
-            }
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable) {
                 ti_phone.error = null
@@ -78,25 +67,25 @@ class SignInFragment : SignInView, MvpAppCompatFragment() {
 
     private fun initClickListeners() {
         btn_sign_in.setOnClickListener {
-            val phone = et_phone.text.toString().trim { it <= ' ' }
-            val login = et_login.text.toString().trim { it <= ' ' }
-            if (TextUtils.isEmpty(phone)) {
+            val phone = et_phone.text.toString()
+            val login = et_login.text.toString()
+            if (phone.isEmpty()) {
                 ti_phone.error = getString(R.string.error_phone)
                 return@setOnClickListener
             }
-            if (TextUtils.isEmpty(login)){
+            if (login.isEmpty()) {
                 ti_login.error = getString(R.string.error_login)
                 return@setOnClickListener
             }
             signInPresenter.sentCode(phone)
 
-           }
+        }
     }
 
     override fun showDialog() {
-        val dlg1 = CodeDialog()
-        dlg1.setTargetFragment(this, 228)
-        dlg1.show(fragmentManager, "dlg1")
+        val verCodeDialog = CodeDialog()
+        verCodeDialog.setTargetFragment(this, 228)
+        verCodeDialog.show(fragmentManager, "dlg1")
     }
 
     override fun checkUser() {
@@ -108,13 +97,13 @@ class SignInFragment : SignInView, MvpAppCompatFragment() {
     }
 
     override fun confirmAuth() {
-        val login = et_login.text.toString().trim { it <= ' ' }
-        val phone = et_phone.text.toString().trim { it <= ' ' }
+        val login = et_login.text.toString()
+        val phone = et_phone.text.toString()
         signInPresenter.addUserToDB(login, phone)
         enterTheApp()
     }
 
-    fun enterTheApp(){
+    private fun enterTheApp() {
         val activity = (activity as LoginActivity)
         startActivity(Intent(context, MainActivity::class.java))
         activity.finish()

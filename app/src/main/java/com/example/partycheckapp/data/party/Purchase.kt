@@ -1,22 +1,12 @@
 package com.example.partycheckapp.data.party
 
-import android.os.Parcelable
 import com.example.partycheckapp.data.user.User
 
 data class Purchase(
-    val title: String,
-    val price: Double,
-    val creditor: User,
-    val userList: List<User>,
-    val imageUrl: String?,
-    val checkUrl: String?
-) {
-    constructor() : this(
-        "title",
-        0.0,
-        User(),
-        ArrayList<User>(),
-        null,
-        null
-    )
-}
+    val title: String = "",
+    val price: Double = 0.0,
+    val creditor: User = User(),
+    val userList: List<User> = ArrayList(),
+    val imageUrl: String? = null,
+    val checkUrl: String? = null
+)

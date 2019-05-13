@@ -12,13 +12,6 @@ class PartySearchListAdapter(private var onItemClick: (Party) -> Unit) : Recycle
     var list: ArrayList<Party> = arrayListOf()
     override fun getItemCount() = list.size
 
-    fun addAll(values: List<Party>) {
-        for (value in values) {
-            list.add(value)
-            notifyItemInserted(list.size)
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.party_item, parent, false)
         return ViewHolder(v)

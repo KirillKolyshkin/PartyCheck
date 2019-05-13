@@ -53,9 +53,8 @@ class PartyListFragment : MvpAppCompatFragment(),
                 this.context, resources.configuration.orientation
             )
         )
-        val manager = LinearLayoutManager(context)
         recycler_view.adapter = partyListAdapter
-        recycler_view.layoutManager = manager
+        recycler_view.layoutManager = LinearLayoutManager(context)
         partyListPresenter.setMyPartyList()
         initClickListeners()
         swipe_container.setColorSchemeResources(R.color.colorAccent)
@@ -66,7 +65,7 @@ class PartyListFragment : MvpAppCompatFragment(),
     private fun initToolbar() {
         val activity = (activity as MainActivity)
         activity.setSupportActionBar(toolbar)
-        toolbar.title = "My Parties"
+        toolbar.title = getString(R.string.my_party)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -88,12 +87,7 @@ class PartyListFragment : MvpAppCompatFragment(),
     }
 
     fun getFilterList(textQuery: String){
-        val newList = ArrayList<Party>()
-        for (party in localParties){
-            if(party.title.contains(textQuery))
-                newList.add(party)
-        }
-        partyListAdapter.list = newList
+        partyListAdapter.list = ArrayList(localParties.filter { it.title.contains(textQuery) })
         partyListAdapter.notifyDataSetChanged()
     }
 

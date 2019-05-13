@@ -5,5 +5,6 @@ data class UserDebtor (
     val phoneNumber: String,
     val cardNumber: String?,
     val debtSize: Double,
-    val imageUrl: String?
+    val imageUrl: String?,
+    val debtRef: String
 )

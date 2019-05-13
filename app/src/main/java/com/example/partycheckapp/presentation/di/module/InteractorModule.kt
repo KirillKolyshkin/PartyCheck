@@ -13,8 +13,13 @@ import dagger.Provides
 class InteractorModule {
 
     @Provides
-    fun provideUserModule(fb: FirebaseAuth, sp: SharedPreferences) = UserInteractor(fb, sp)
+    fun provideUserModule(firebaseAuth: FirebaseAuth, sharedPreferences: SharedPreferences) =
+        UserInteractor(firebaseAuth, sharedPreferences)
 
     @Provides
-    fun provideUserProvider(df: FirebaseFirestore, sp: SharedPreferences, fs: FirebaseStorage) = DBProvider(df, sp, fs)
+    fun provideBDProvider(
+        firebaseFirestore: FirebaseFirestore,
+        sharedPreferences: SharedPreferences,
+        firebaseStorage: FirebaseStorage
+    ) = DBProvider(firebaseFirestore, sharedPreferences, firebaseStorage)
 }

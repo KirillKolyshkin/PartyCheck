@@ -10,7 +10,7 @@ import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
 class AddPurchasePresenter(private val dbProvider: DBProvider) : MvpPresenter<AddPurchaseView>() {
-    protected val compositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable()
 
     fun getParty(partyId: String) {
         val disposable = dbProvider.getParty(partyId)

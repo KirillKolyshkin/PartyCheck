@@ -13,8 +13,6 @@ class PartyApp : Application() {
         super.onCreate()
         instance = this
     }
-
-
     fun getAppComponent(): AppComponent {
         if (appComponent == null) {
             appComponent = DaggerAppComponent

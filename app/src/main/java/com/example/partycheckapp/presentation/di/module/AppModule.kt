@@ -34,7 +34,7 @@ class AppModule(private val app: Application) {
     fun providesFirebaseStorage(): FirebaseStorage = FirebaseStorage.getInstance()
 
     companion object {
-        private const val PREFS_KEY = "com.user.prefs"
+        private const val PREFS_KEY = "com.example.partycheckapp"
     }
 }
 

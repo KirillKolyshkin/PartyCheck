@@ -1,10 +1,8 @@
 package com.example.partycheckapp.presentation.feature.auth
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +11,6 @@ import com.example.partycheckapp.R
 import kotlinx.android.synthetic.main.dialog_ver_code.*
 
 class CodeDialog : DialogFragment(), View.OnClickListener {
-
-    val LOG_TAG = "myLogs"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.dialog_ver_code, container)
@@ -36,16 +32,6 @@ class CodeDialog : DialogFragment(), View.OnClickListener {
                 }
             }
         }
-    }
-
-    override fun onDismiss(dialog: DialogInterface?) {
-        super.onDismiss(dialog)
-        Log.d(LOG_TAG, "Dialog 1: onDismiss")
-    }
-
-    override fun onCancel(dialog: DialogInterface?) {
-        super.onCancel(dialog)
-        Log.d(LOG_TAG, "Dialog 1: onCancel")
     }
 
     private fun sendResult(REQUEST_CODE: Int) {

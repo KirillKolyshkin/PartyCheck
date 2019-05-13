@@ -8,7 +8,7 @@ import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
 class SearchPartyListPresenter(private val dbProvider: DBProvider) : MvpPresenter<SearchPartyListView>() {
-    protected val compositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable()
 
     fun setPartySearchList() {
         val disposable = dbProvider.getAllParties().subscribeBy(

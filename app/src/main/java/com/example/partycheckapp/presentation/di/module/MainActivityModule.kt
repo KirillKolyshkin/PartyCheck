@@ -17,15 +17,13 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class MainActivityrModule {
+class MainActivityModule {
 
     @Provides
-    fun provideDebtorsListPresenter(userProvider: DBProvider) =
-        DebtorsListPresenter(userProvider)
+    fun provideDebtorsListPresenter(userProvider: DBProvider) = DebtorsListPresenter(userProvider)
 
     @Provides
-    fun provideProfilePresenter(userProvider: DBProvider) =
-        ProfilePresenter(userProvider)
+    fun provideProfilePresenter(userProvider: DBProvider) = ProfilePresenter(userProvider)
 
     @Provides
     fun providePartyListPresenter(userProvider: DBProvider) = PartyListPresenter(userProvider)

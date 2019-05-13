@@ -2,7 +2,6 @@ package com.example.partycheckapp.presentation.di.component
 
 import com.example.numfac.di.scope.PartyScope
 import com.example.partycheckapp.presentation.di.module.InteractorModule
-import com.example.partycheckapp.presentation.di.module.MainActivityrModule
 import com.example.partycheckapp.presentation.di.module.PartyDetailsModule
 import com.example.partycheckapp.presentation.feature.partydetails.addpurchase.AddPurchaseFragment
 import com.example.partycheckapp.presentation.feature.partydetails.mainpartyscreen.MainPartyScreenFragment

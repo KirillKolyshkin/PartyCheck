@@ -7,10 +7,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AppModule::class])
 interface AppComponent {
-
     fun mainActivityComponent(): MainActivityComponent.Builder
     fun partyDetailsComponent(): PartyDetailsComponent.Builder
     fun signInComponent(): SignInComponent.Builder
     fun addPartyComponent(): AddPartyComponent.Builder
-
 }

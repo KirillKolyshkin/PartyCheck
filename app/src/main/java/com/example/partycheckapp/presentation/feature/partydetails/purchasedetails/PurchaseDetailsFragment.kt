@@ -45,9 +45,8 @@ class PurchaseDetailsFragment : MvpAppCompatFragment(), PurchaseDetailsView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
-        val manager = LinearLayoutManager(context)
         recycler_view.adapter = purchaseDetailsAdapter
-        recycler_view.layoutManager = manager
+        recycler_view.layoutManager = LinearLayoutManager(context)
         val partyId = arguments?.getString("party_id") ?: ""
         val title = arguments?.getString("title") ?: ""
         purchaseDetailsPresenter.getPurchase(partyId, title)
@@ -56,7 +55,7 @@ class PurchaseDetailsFragment : MvpAppCompatFragment(), PurchaseDetailsView {
     private fun initToolbar() {
         val activity = (activity as PartyDetailsActivity)
         activity.setSupportActionBar(toolbar)
-        toolbar.title = "Purchase Details"
+        toolbar.title = getString(R.string.purchase_details)
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
         toolbar.setNavigationOnClickListener {
             activity.onBackPressed()

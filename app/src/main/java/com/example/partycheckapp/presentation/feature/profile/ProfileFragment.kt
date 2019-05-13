@@ -59,7 +59,7 @@ class ProfileFragment : MvpAppCompatFragment(),
         }
     }
 
-    fun initFocusable() {
+    private fun initFocusable() {
         et_phone_num.tag = et_phone_num.keyListener
         et_card_num.tag = et_card_num.keyListener
         editFieldsMode = false
@@ -94,32 +94,32 @@ class ProfileFragment : MvpAppCompatFragment(),
     }
 
     override fun showDialog() {
-        val ad = context?.let {
+        context?.let {
             AlertDialog.Builder(it)
-                .setTitle("Choose Type")  // заголовок
-                .setPositiveButton("Camera") { dialog, arg1 -> takePhoto() }
+                .setTitle(getString(R.string.choose_type))
+                .setPositiveButton("Camera") { _, _ -> takePhoto() }
                 .setNegativeButton(
                     "Gallery"
-                ) { dialog, arg1 -> chooseFromDevise() }
+                ) { _, _ -> chooseFromDevise() }
                 .show()
         }
     }
 
-    fun takePhoto() {
+    private fun takePhoto() {
         val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(
             cameraIntent,
-            TAKE_PICTURE
+            100
         )
     }
 
-    fun chooseFromDevise() {
+    private fun chooseFromDevise() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "image/*"
         startActivityForResult(
-            Intent.createChooser(intent, "Select Picture"),
-            REQUEST_GET_SINGLE_FILE
+            Intent.createChooser(intent, getString(R.string.select_picture)),
+            200
         )
     }
 
@@ -132,7 +132,6 @@ class ProfileFragment : MvpAppCompatFragment(),
                         data?.extras?.get("data") as Bitmap
                     iv_photo.setImageBitmap(selectedImage)
                 }
-                //val bitmap = (iv_photo.drawable as BitmapDrawable).bitmap
             }
             200 -> {
                 if (resultCode == RESULT_OK) {
@@ -148,7 +147,7 @@ class ProfileFragment : MvpAppCompatFragment(),
         }
     }
 
-    fun hideKeyboardFrom(context: Context, view: View) {
+    private fun hideKeyboardFrom(context: Context, view: View) {
         val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(
             view.windowToken,
@@ -156,21 +155,21 @@ class ProfileFragment : MvpAppCompatFragment(),
         )
     }
 
-    fun getPathFromURI(contentUri: Uri): String? {
+    private fun getPathFromURI(contentUri: Uri): String? {
         var res: String? = null
         val proj = arrayOf(MediaStore.Images.Media.DATA)
         val cursor = context?.let { it.contentResolver.query(contentUri, proj, null, null, null) }
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                val column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-                res = cursor.getString(column_index)
+                val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                res = cursor.getString(columnIndex)
             }
         }
         cursor?.close()
         return res
     }
 
-    fun updateUser() {
+    private fun updateUser() {
         val name = tv_user_name.text.toString()
         val phone = et_phone_num.text.toString().trim { it <= ' ' }
         var card: Long = 0
@@ -185,13 +184,10 @@ class ProfileFragment : MvpAppCompatFragment(),
         } catch (e: Exception) {
             bitmap = null
         }
-        //val bitmap = (iv_photo.drawable as BitmapDrawable).bitmap
         profilePresenter.updateUSer(name, phone, card.toString(), bitmap)
     }
 
     companion object {
-        val TAKE_PICTURE = 100
-        val REQUEST_GET_SINGLE_FILE = 200
         fun newInstance(): ProfileFragment =
             ProfileFragment()
     }

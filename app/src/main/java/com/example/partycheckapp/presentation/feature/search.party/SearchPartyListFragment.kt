@@ -56,9 +56,8 @@ class SearchPartyListFragment : MvpAppCompatFragment(),
             )
         )
         searchPartyListPresenter.getUserPartyList()
-        val manager = LinearLayoutManager(context)
         recycler_view.adapter = searchPartyListAdapter
-        recycler_view.layoutManager = manager
+        recycler_view.layoutManager = LinearLayoutManager(context)
         searchPartyListPresenter.setPartySearchList()
         swipe_container.setColorSchemeResources(R.color.colorAccent)
         swipe_container.setOnRefreshListener(this)
@@ -68,7 +67,7 @@ class SearchPartyListFragment : MvpAppCompatFragment(),
     private fun initToolbar() {
         val activity = (activity as MainActivity)
         activity.setSupportActionBar(toolbar)
-        toolbar.title = "Search Party"
+        toolbar.title = getString(R.string.search_party)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -89,14 +88,8 @@ class SearchPartyListFragment : MvpAppCompatFragment(),
         localMenu = menu
     }
 
-    fun getFilterList(textQuery: String){
-        val newList = ArrayList<Party>()
-        for (party in dataList){
-            if(party.title.contains(textQuery))
-                newList.add(party)
-        }
-        showPartyList(newList)
-    }
+    fun getFilterList(textQuery: String) =
+        showPartyList(ArrayList(dataList.filter { it.title.contains(textQuery) }))
 
     override fun onRefresh() {
         searchPartyListPresenter.setPartySearchList()

@@ -1,18 +1,16 @@
 package com.example.partycheckapp.domain.user
 
 import android.content.SharedPreferences
-import android.util.Log
-import androidx.constraintlayout.widget.Constraints.TAG
-import com.example.partycheckapp.data.debtors.UserDebtor
 import com.google.android.gms.tasks.TaskExecutors
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import io.reactivex.Maybe
 import java.util.concurrent.TimeUnit
-import kotlin.random.Random
 
-class UserInteractor(private val auth: FirebaseAuth,
-                     private val sharedPreferences: SharedPreferences) {
+class UserInteractor(
+    private val auth: FirebaseAuth,
+    private val sharedPreferences: SharedPreferences
+) {
 
     fun sentCode(phone: String): Maybe<String> {
 
@@ -25,9 +23,7 @@ class UserInteractor(private val auth: FirebaseAuth,
                 object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                         emitter.onComplete()
-                        Log.d(TAG, "onVerificationCompleted:$credential")
                         signInWithPhoneAuthCredential(credential)
-                        //signInPresenter.authPassed()
                     }
 
                     override fun onVerificationFailed(e: FirebaseException) {
@@ -38,15 +34,8 @@ class UserInteractor(private val auth: FirebaseAuth,
                         verificationId: String?,
                         token: PhoneAuthProvider.ForceResendingToken
                     ) {
-                        Log.d(TAG, "onCodeSent:$verificationId")
-                        // Save verification ID and resending token so we can use them ))later
-
                         sharedPreferences.edit().putString(CURRENT_VERIFICATION_ID, verificationId).apply()
-                        //resendToken = token
-                        emitter.onSuccess(verificationId?:"")
-                        //signInWithPhoneAuthCredential(PhoneAuthProvider.getCredential(verificationId, "433155"), context)
-                        // ...
-
+                        emitter.onSuccess(verificationId ?: "")
                     }
                 })
         }
@@ -61,8 +50,6 @@ class UserInteractor(private val auth: FirebaseAuth,
         var response = false
         auth.signInWithCredential(credential).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                // Sign in success, update UI with the signed-in user's information
-                Log.d(TAG, "signInWithCredential:success")
                 response = true
                 val user = task.result?.user
                 user?.let { auth.updateCurrentUser(it) }
@@ -70,12 +57,8 @@ class UserInteractor(private val auth: FirebaseAuth,
                     .putString(CURRENT_CODE, credential.smsCode)
                     .putString(CURRENT_PHONE, user?.phoneNumber)
                     .apply()
-                // ...
             } else {
-                // Sign in failed, display a message and update the UI
-                Log.w(TAG, "signInWithCredential:failure", task.exception)
                 if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                    // The verification code entered was invalid
                 }
             }
         }
