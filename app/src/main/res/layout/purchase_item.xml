@@ -17,6 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
+            android:ellipsize="end"
+            android:ems="8"
             android:layout_toEndOf="@id/iv_purchase_icon"
             android:textColor="@color/colorPrimaryText"
             android:layout_marginTop="8dp"

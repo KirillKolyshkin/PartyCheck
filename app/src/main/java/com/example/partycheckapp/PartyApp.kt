@@ -13,6 +13,7 @@ class PartyApp : Application() {
         super.onCreate()
         instance = this
     }
+
     fun getAppComponent(): AppComponent {
         if (appComponent == null) {
             appComponent = DaggerAppComponent
@@ -24,7 +25,7 @@ class PartyApp : Application() {
     }
 
     companion object {
-        @JvmStatic lateinit var instance: PartyApp
+        lateinit var instance: PartyApp
             private set
     }
 }

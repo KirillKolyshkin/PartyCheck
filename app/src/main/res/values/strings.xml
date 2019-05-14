@@ -30,7 +30,6 @@
     <string name="error_description">Enter description!</string>
     <string name="error_place">Enter place!</string>
     <string name="error_price">Enter price!</string>
-    <string name="add_party">Add Party</string>
     <string name="error_pass_length">Password too short, enter minimum 6 characters!</string>
     <string name="error_signin">Sign In Error</string>
     <string name="debt_size">Debt Size</string>

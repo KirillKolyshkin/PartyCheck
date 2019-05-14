@@ -53,13 +53,15 @@ class AddPartyFragment : MvpAppCompatFragment(), AddPartyView {
     }
 
     override fun showDialog() {
-        var ad = context?.let { AlertDialog.Builder(it) }
-        ad?.setTitle(getString(R.string.choose_type))
-        ad?.setPositiveButton("Camera") { _, _ -> takePhoto() }
-        ad?.setNegativeButton(
-            "Gallery"
-        ) { _, _ -> chooseFromDevise() }
-        ad?.show()
+        context?.let {
+            AlertDialog.Builder(it)
+                .setTitle(getString(R.string.choose_type))
+                .setPositiveButton("Camera") { _, _ -> takePhoto() }
+                .setNegativeButton(
+                    "Gallery"
+                ) { _, _ -> chooseFromDevise() }
+                .show()
+        }
     }
 
     fun takePhoto() {
@@ -208,8 +210,8 @@ class AddPartyFragment : MvpAppCompatFragment(), AddPartyView {
     }
 
     companion object {
-        const val TAKE_PICTURE = 100
-        const val REQUEST_GET_SINGLE_FILE = 200
+        private const val TAKE_PICTURE = 100
+        private const val REQUEST_GET_SINGLE_FILE = 200
         fun newInstance(): AddPartyFragment = AddPartyFragment()
     }
 }

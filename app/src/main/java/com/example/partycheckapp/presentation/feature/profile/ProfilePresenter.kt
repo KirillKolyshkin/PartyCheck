@@ -24,7 +24,7 @@ class ProfilePresenter(private val dbProvider: DBProvider) : MvpPresenter<Profil
         getUser()
     }
 
-    fun updateUSer(name: String, phone: String, cardNumber: String?, bitmap: Bitmap?) =
+    fun updateUser(name: String, phone: String, cardNumber: String?, bitmap: Bitmap?) =
         dbProvider.updateCurrentUser(name, phone, cardNumber, bitmap)
 
     override fun destroyView(view: ProfileView?) {

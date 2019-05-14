@@ -109,7 +109,7 @@ class ProfileFragment : MvpAppCompatFragment(),
         val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(
             cameraIntent,
-            100
+            TAKE_PICTURE
         )
     }
 
@@ -119,7 +119,7 @@ class ProfileFragment : MvpAppCompatFragment(),
         intent.type = "image/*"
         startActivityForResult(
             Intent.createChooser(intent, getString(R.string.select_picture)),
-            200
+            REQUEST_GET_SINGLE_FILE
         )
     }
 
@@ -184,10 +184,12 @@ class ProfileFragment : MvpAppCompatFragment(),
         } catch (e: Exception) {
             bitmap = null
         }
-        profilePresenter.updateUSer(name, phone, card.toString(), bitmap)
+        profilePresenter.updateUser(name, phone, card.toString(), bitmap)
     }
 
     companion object {
+        private const val TAKE_PICTURE = 100
+        private const val REQUEST_GET_SINGLE_FILE = 200
         fun newInstance(): ProfileFragment =
             ProfileFragment()
     }

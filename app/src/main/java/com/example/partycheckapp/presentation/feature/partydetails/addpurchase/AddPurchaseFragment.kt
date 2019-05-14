@@ -148,19 +148,21 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
     }
 
     override fun showDialog(isIcon: Boolean) {
-        val ad = context?.let { AlertDialog.Builder(it) }
-        ad?.setTitle(getString(R.string.choose_type))
-        ad?.setPositiveButton("Camera") { _, _ -> takePhoto(isIcon) }
-        ad?.setNegativeButton("Gallery") { _, _ -> chooseFromDevise(isIcon) }
-        ad?.show()
+        context?.let {
+            AlertDialog.Builder(it)
+                .setTitle(getString(R.string.choose_type))
+                .setPositiveButton("Camera") { _, _ -> takePhoto(isIcon) }
+                .setNegativeButton("Gallery") { _, _ -> chooseFromDevise(isIcon) }
+                .show()
+        }
     }
 
     private fun takePhoto(isIcon: Boolean) {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (isIcon)
-            startActivityForResult(cameraIntent, 100)
+            startActivityForResult(cameraIntent, TAKE_PICTURE)
         else
-            startActivityForResult(cameraIntent, 101)
+            startActivityForResult(cameraIntent, TAKE_PICTURE_CHECK)
     }
 
     private fun chooseFromDevise(isIcon: Boolean) {
@@ -170,12 +172,12 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
         if (isIcon)
             startActivityForResult(
                 Intent.createChooser(intent, getString(R.string.select_picture)),
-                200
+                REQUEST_GET_SINGLE_FILE
             )
         else
             startActivityForResult(
                 Intent.createChooser(intent, getString(R.string.select_picture)),
-                201
+                REQUEST_GET_SINGLE_FILE_CHECK
             )
     }
 
@@ -257,6 +259,10 @@ class AddPurchaseFragment : MvpAppCompatFragment(), AddPurchaseView {
     }
 
     companion object {
+        private const val TAKE_PICTURE = 100
+        private const val REQUEST_GET_SINGLE_FILE = 200
+        private const val TAKE_PICTURE_CHECK = 101
+        private const val REQUEST_GET_SINGLE_FILE_CHECK = 201
         fun newInstance(partyId: String): AddPurchaseFragment {
             val args = Bundle()
             args.putString("party_id", partyId)

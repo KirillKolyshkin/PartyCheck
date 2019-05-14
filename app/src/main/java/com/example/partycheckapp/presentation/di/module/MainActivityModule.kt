@@ -1,6 +1,7 @@
 package com.example.partycheckapp.presentation.di.module
 
 import com.example.partycheckapp.domain.bd.DBProvider
+import com.example.partycheckapp.domain.debtor.DebtorMapper
 import com.example.partycheckapp.domain.user.UserInteractor
 import com.example.partycheckapp.presentation.feature.auth.SignInPresenter
 import com.example.partycheckapp.presentation.feature.debtorDetails.DebtorDetailsPresenter
@@ -20,7 +21,7 @@ import dagger.Provides
 class MainActivityModule {
 
     @Provides
-    fun provideDebtorsListPresenter(userProvider: DBProvider) = DebtorsListPresenter(userProvider)
+    fun provideDebtorsListPresenter(userProvider: DBProvider, debtorMapper: DebtorMapper) = DebtorsListPresenter(userProvider, debtorMapper)
 
     @Provides
     fun provideProfilePresenter(userProvider: DBProvider) = ProfilePresenter(userProvider)
