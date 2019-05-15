@@ -89,7 +89,7 @@ class ProfileFragment : MvpAppCompatFragment(),
             et_phone_num.keyListener = null
             et_card_num.keyListener = null
             iv_photo.setOnClickListener { }
-            this.context?.let { view?.let { it1 -> hideKeyboardFrom(it, it1) } }
+            view?.let { it.hideKeyboardFrom() }
         }
     }
 
@@ -147,10 +147,11 @@ class ProfileFragment : MvpAppCompatFragment(),
         }
     }
 
-    private fun hideKeyboardFrom(context: Context, view: View) {
+
+    private fun View.hideKeyboardFrom() {
         val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(
-            view.windowToken,
+            this.windowToken,
             InputMethodManager.HIDE_NOT_ALWAYS
         )
     }
