@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+            android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                app:titleTextColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize">
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_purchase_icon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/appbar"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"/>
+
+    <TextView
+            android:id="@+id/tv_purchase_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_alignTop="@+id/iv_purchase_icon"
+            android:layout_toEndOf="@id/iv_purchase_icon"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            tools:text="SomePurchase"/>
+
+    <TextView
+            android:id="@+id/tv_creditor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_alignStart="@id/tv_purchase_name"
+            android:layout_below="@+id/tv_purchase_name"
+            android:textColor="@color/colorSecondaryText"
+            tools:text="KillReal"/>
+
+    <TextView
+            android:id="@+id/tv_price_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_purchase_icon"
+            android:layout_marginTop="16sp"
+            android:layout_marginStart="16sp"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="16sp"
+            android:text="@string/price"/>
+
+    <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_price_title"
+            android:layout_marginTop="8dp"
+            android:layout_alignStart="@+id/tv_price_title"
+            android:textColor="@color/colorGreenNumber"
+            android:textSize="20sp"
+            tools:text="100$"/>
+
+    <TextView
+            android:id="@+id/tv_depositors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_price"
+            android:layout_marginTop="16dp"
+            android:layout_alignStart="@+id/tv_price_title"
+            android:textSize="18sp"
+            android:textColor="@color/colorSecondaryText"
+            android:text="@string/depositors"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:layout_below="@+id/tv_depositors"
+            tools:listitem="@layout/user_item"/>
+
+</RelativeLayout>

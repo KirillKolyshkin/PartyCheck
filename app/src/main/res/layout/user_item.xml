@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools" android:id="@+id/date_item"
+                android:layout_width="match_parent"
+                android:layout_height="88sp"
+                android:padding="8dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_user_icon"
+        android:layout_width="56sp"
+        android:layout_height="56dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:ellipsize="end"
+            android:ems="7"
+            android:layout_toEndOf="@id/iv_user_icon"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            tools:text="Louis Armstrong" />
+
+    <TextView
+            android:id="@+id/tv_phone_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_alignStart="@id/tv_name"
+            android:layout_below="@+id/tv_name"
+            android:textColor="@color/colorDivider"
+            tools:text="+78005553535" />
+
+    <TextView
+            android:id="@+id/tv_money_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorGreenNumber"
+            tools:text="+18.54$" />
+</RelativeLayout>
