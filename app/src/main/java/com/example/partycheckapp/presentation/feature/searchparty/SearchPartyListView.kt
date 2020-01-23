@@ -1,4 +1,4 @@
-package com.example.partycheckapp.presentation.feature.search.party
+package com.example.partycheckapp.presentation.feature.searchparty
 
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy

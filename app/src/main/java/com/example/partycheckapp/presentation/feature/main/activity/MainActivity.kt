@@ -8,7 +8,7 @@ import com.example.partycheckapp.R
 import com.example.partycheckapp.presentation.feature.party.view.DebtorsListFragment
 import com.example.partycheckapp.presentation.feature.profile.ProfileFragment
 import com.example.partycheckapp.presentation.feature.party.partylist.PartyListFragment
-import com.example.partycheckapp.presentation.feature.search.party.SearchPartyListFragment
+import com.example.partycheckapp.presentation.feature.searchparty.SearchPartyListFragment
 import kotlinx.android.synthetic.main.main_activity_view.*
 
 class MainActivity : AppCompatActivity() {

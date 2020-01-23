@@ -1,6 +1,5 @@
-package com.example.partycheckapp.presentation.feature.debtorDetails
+package com.example.partycheckapp.presentation.feature.debtordetails
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import com.example.partycheckapp.PartyApp
 import com.example.partycheckapp.R
 import com.example.partycheckapp.data.debtors.Debt
 import com.example.partycheckapp.data.user.User
-import com.example.partycheckapp.presentation.feature.main.activity.MainActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_debtor_details.*
 import javax.inject.Inject

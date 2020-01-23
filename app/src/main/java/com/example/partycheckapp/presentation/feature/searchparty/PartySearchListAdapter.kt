@@ -1,11 +1,10 @@
-package com.example.partycheckapp.presentation.feature.search.party
+package com.example.partycheckapp.presentation.feature.searchparty
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.partycheckapp.R
 import com.example.partycheckapp.data.party.Party
-import com.example.partycheckapp.presentation.feature.search.party.ViewHolder
 
 class PartySearchListAdapter(private var onItemClick: (Party) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
 

@@ -1,4 +1,4 @@
-package com.example.partycheckapp.presentation.feature.debtorDetails
+package com.example.partycheckapp.presentation.feature.debtordetails
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
