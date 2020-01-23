@@ -1,4 +1,4 @@
-package com.example.partycheckapp.presentation.feature.debtorDetails
+package com.example.partycheckapp.presentation.feature.debtordetails
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter

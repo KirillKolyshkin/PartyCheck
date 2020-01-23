@@ -1,4 +1,4 @@
-package com.example.partycheckapp.presentation.feature.search.party
+package com.example.partycheckapp.presentation.feature.searchparty
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

@@ -16,7 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.partycheckapp.PartyApp
 import com.example.partycheckapp.data.user.User
-import com.example.partycheckapp.presentation.feature.debtorDetails.DebtorDetailsActivity
+import com.example.partycheckapp.presentation.feature.debtordetails.DebtorDetailsActivity
 import com.example.partycheckapp.presentation.feature.main.activity.MainActivity
 import kotlinx.android.synthetic.main.fragment_debtor_list.*
 import javax.inject.Inject

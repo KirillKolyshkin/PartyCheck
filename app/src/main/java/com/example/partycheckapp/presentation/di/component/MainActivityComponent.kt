@@ -3,11 +3,11 @@ package com.example.partycheckapp.presentation.di.component
 import com.example.numfac.di.scope.PartyScope
 import com.example.partycheckapp.presentation.di.module.InteractorModule
 import com.example.partycheckapp.presentation.di.module.MainActivityModule
-import com.example.partycheckapp.presentation.feature.debtorDetails.DebtorDetailsFragment
+import com.example.partycheckapp.presentation.feature.debtordetails.DebtorDetailsFragment
 import com.example.partycheckapp.presentation.feature.party.view.DebtorsListFragment
 import com.example.partycheckapp.presentation.feature.party.partylist.PartyListFragment
 import com.example.partycheckapp.presentation.feature.profile.ProfileFragment
-import com.example.partycheckapp.presentation.feature.search.party.SearchPartyListFragment
+import com.example.partycheckapp.presentation.feature.searchparty.SearchPartyListFragment
 import dagger.Subcomponent
 
 @Subcomponent(modules = [MainActivityModule::class, InteractorModule::class])

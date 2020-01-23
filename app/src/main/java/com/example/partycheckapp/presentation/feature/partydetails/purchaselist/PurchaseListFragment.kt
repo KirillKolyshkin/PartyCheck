@@ -1,10 +1,8 @@
 package com.example.partycheckapp.presentation.feature.partydetails.purchaselist
 
-import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -19,10 +17,6 @@ import com.example.partycheckapp.presentation.feature.partydetails.addpurchase.A
 import com.example.partycheckapp.presentation.feature.partydetails.purchasedetails.PurchaseDetailsFragment
 import kotlinx.android.synthetic.main.fragment_purchase_list.*
 import javax.inject.Inject
-
-
-
-
 
 class PurchaseListFragment : MvpAppCompatFragment(),
     PurchaseListView,

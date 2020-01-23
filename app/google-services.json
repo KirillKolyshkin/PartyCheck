@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "398251818063",
+    "firebase_url": "https://partycheck.firebaseio.com",
+    "project_id": "partycheck",
+    "storage_bucket": "partycheck.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398251818063:android:c1af9d59a4945295",
+        "android_client_info": {
+          "package_name": "com.example.partycheckapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398251818063-c3ain0cmn2i8riaa4gpmsh905kp0sflv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.partycheckapp",
+            "certificate_hash": "502480ff519d7b8ef6f55c40eee8de351b36da10"
+          }
+        },
+        {
+          "client_id": "398251818063-p36l43h6m9tptpbrih4etbqu3un2m5c4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHpfSfZZdkQLf9EMROPrZwno97uaHHh-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398251818063-p36l43h6m9tptpbrih4etbqu3un2m5c4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

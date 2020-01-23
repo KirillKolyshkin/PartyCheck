@@ -1,4 +1,4 @@
-package com.example.partycheckapp.presentation.feature.search.party
+package com.example.partycheckapp.presentation.feature.searchparty
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
